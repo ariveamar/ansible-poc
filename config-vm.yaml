@@ -1,0 +1,19 @@
+---
+- name: Guest VM Config Network & Hostname
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: Change Hostname
+      hostname:
+        name="{{ var_hostname }}"
+    - name: Add an Ethernet connection with static IP configuration
+      nmcli:
+        conn_name: ens192
+        ifname: ens192
+        type: ethernet
+        ip4: "{{ var_ip }}"
+        gw4: "{{ var_gw }}"
+        dns4: "{{ var_dns }}"
+        state: present
+    - name: return motd to registered var
+      command: systemctl restart network
