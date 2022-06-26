@@ -1,0 +1,9 @@
+---
+- name: Check Disk Space Usage
+  hosts: srv1.example.com
+  tasks:
+          - name: Disk usage from command module
+            command: du -sh "{{ var_dir }}"
+            register: space
+          - debug:
+                  var: space.stdout_lines
