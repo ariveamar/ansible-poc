@@ -1,0 +1,18 @@
+---
+- name: Allow RDP on Firewall
+  gather_facts: no
+  hosts: all
+  tasks:
+- name: Firewall rule to allow RDP on TCP port 3389
+  community.windows.win_firewall_rule:
+    name: Remote Desktop
+    localport: 3389
+    action: allow
+    direction: in
+    protocol: tcp
+    profiles: 
+    - private
+    - domain
+    - public
+    state: present
+    enabled: yes
