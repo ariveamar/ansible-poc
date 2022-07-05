@@ -1,4 +1,8 @@
 ---
+- name: Install IIS Web Server
+  gather_facts: no
+  hosts: all
+  tasks:
 - name: Install IIS Web-Server with sub features and management tools
   ansible.windows.win_feature:
     name: 
