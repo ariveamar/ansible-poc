@@ -1,4 +1,9 @@
-- name: Allow HTTP on Firewalld
+---
+- name: Deny Firewall Rule
+  gather_facts: no
+  hosts: all
+  tasks:
+- name: Deny HTTP on Firewalld
   ansible.posix.firewalld:
     service: http
     permanent: yes
