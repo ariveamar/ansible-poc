@@ -12,7 +12,6 @@
 - esxi_password: 'P@ssw0rd'
 
 # VM settings
-- vm_name: VM_DEMO
 - template_name: Template-RHEL
 - datastore: esxi-redhat
 - network: ExternalAPI
