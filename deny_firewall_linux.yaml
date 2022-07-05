@@ -1,0 +1,5 @@
+- name: Allow HTTP on Firewalld
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: disabled
