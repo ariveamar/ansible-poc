@@ -1,3 +1,8 @@
+---
+- name: Allow HTTP Firewall
+  gather_facts: no
+  hosts: all
+  tasks:
 - name: Allow HTTP on Firewalld
   ansible.posix.firewalld:
     service: http
