@@ -1,0 +1,13 @@
+---
+  - name: Create vlan 91
+    commscope.icx.icx_vlan:
+      vlan_id: 91
+      ip_arp_inspection: present
+      purge: present
+  - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
+    commscope.icx.icx_vlan:
+      name: test-vlan
+      vlan_id: 91
+      interfaces:
+        name:
+          - ethernet 1/1/48
