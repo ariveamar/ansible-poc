@@ -1,0 +1,5 @@
+
+- name: remove the Apache package
+  yum:
+    name: httpd
+    state: absent
