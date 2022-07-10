@@ -1,0 +1,5 @@
+---
+  - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
+    commscope.icx.icx_command:
+      commands:
+        - ip access-list standard 1 sequence 10 deny host 192.168.40.2
