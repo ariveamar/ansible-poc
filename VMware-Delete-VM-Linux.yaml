@@ -5,9 +5,9 @@
     - vcenter_vars.yml
   hosts: localhost
   tasks:
-    - name: Poweroff virtual machine name {{ vm_name }}
+    - name: Poweroff virtual machine name {{ vm_name1 }}
       vmware_guest_powerstate:
-        name: "{{ vm_name }}"
+        name: "{{ vm_name1 }}"
         hostname: "{{ vcenter_server }}"
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_pass }}"
@@ -15,15 +15,16 @@
         folder: "{{ folder }}"
         state: powered-off
    
-    - name: Delete a virtual machine name {{ vm_name }}
+    - name: Delete a virtual machine name {{ vm_name1 }}
       vmware_guest:
-        name: "{{ vm_name }}"
+        name: "{{ vm_name1 }}"
         hostname: "{{ vcenter_server }}"
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_pass }}"
         validate_certs: False
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
+        delete_from_inventory: False
         state: absent
       register: vm_result
 
