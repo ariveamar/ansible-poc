@@ -16,7 +16,7 @@
 - template_name2: win-template
 - datastore: esxi-redhat
 - network: VM Network
-- folder: /ansible-demo/vm/
+- folder: /Datacenter-Ansible/VM-Ansible
 - dns_server: 1.1.1.1
 
 # Snapshot settings
