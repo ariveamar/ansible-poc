@@ -24,7 +24,6 @@
         validate_certs: False
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
-        delete_from_inventory: False
         state: absent
       register: vm_result
 
