@@ -1,0 +1,25 @@
+---
+- name: Guest Creation
+  gather_facts: no
+  vars_files:
+    - vcenter_vars.yml
+  hosts: localhost
+  tasks:
+    - name: Clone a virtual machine {{ vm_name }} from existing template {{ template_name }}
+      vmware_guest:
+        name: "{{ vm_name2 }}"
+        template: "{{ template_name2 }}"
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: no 
+        folder: "{{ folder }}"
+        datacenter: "{{ datacenter }}"
+        cluster: "{{ cluster }}"
+      register: vm_result
+
+    - name: Assert that VM is created
+      assert:
+        that:
+          - "vm_result.changed"
+
