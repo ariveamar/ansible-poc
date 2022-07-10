@@ -1,20 +1,21 @@
 ---
 # Global Settings
-- vcenter_server: 10.8.150.6
+- vcenter_server: 10.8.150.8
 - vcenter_user: administrator@vsphere.local
-- vcenter_pass: 'admin.P@ssw0rd'
-- datacenter: ansible-demo
-- cluster: RedHat-Cluster
+- vcenter_pass: 'P@ssw0rd'
+- datacenter: Datacenter-Ansible
+- cluster: Cluster-Ansible
 
 # ESXi settings
-- esxi_hostname: 10.8.230.110
+- esxi_hostname: 10.8.156.254
 - esxi_username: root
 - esxi_password: 'P@ssw0rd'
 
 # VM settings
-- template_name: Template-RHEL
+- template_name1: linux-template
+- template_name2: win-template
 - datastore: esxi-redhat
-- network: ExternalAPI
+- network: VM Network
 - folder: /ansible-demo/vm/
 - dns_server: 1.1.1.1
 
