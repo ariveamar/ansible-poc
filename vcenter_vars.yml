@@ -18,7 +18,7 @@
 - vm_name1: Linux-VM
 - datastore: esxi-redhat
 - network: VM Network
-- folder: /Datacenter-Ansible/VM-Ansible
+- folder: VM-Ansible
 - dns_server: 1.1.1.1
 
 # Snapshot settings
