@@ -14,6 +14,8 @@
 # VM settings
 - template_name1: linux-template
 - template_name2: win-template
+- vm_name2: Windows-VM
+- vm_name1: Linux-VM
 - datastore: esxi-redhat
 - network: VM Network
 - folder: /Datacenter-Ansible/VM-Ansible
