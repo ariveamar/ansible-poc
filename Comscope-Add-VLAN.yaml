@@ -4,12 +4,12 @@
   gather_facts: no
   tasks:
     - name: Create vlan 91
-      commscope.icx.icx_vlan:
+      community.network.icx_config:
         vlan_id: 91
         ip_arp_inspection: present
         purge: present
     - name: Add a single ethernet 1/1/24 as access(untagged) port to vlan 91
-      commscope.icx.icx_vlan:
+      community.network.icx_config:
         name: test-vlan
         vlan_id: 91
         interfaces:
