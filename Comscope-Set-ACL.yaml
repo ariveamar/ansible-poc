@@ -2,8 +2,6 @@
 - name: Comscope Set ACL 
   hosts: all
   gather_facts: no
-  collections:
-  - name: commscope.icx
   tasks:
     - name: Set Access List
       commscope.icx.icx_command:
