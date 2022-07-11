@@ -3,16 +3,28 @@
   gather_facts: no
   hosts: all
   tasks:
-- name: Install IIS Web-Server with sub features and management tools
-  ansible.windows.win_feature:
-    name: 
-    - Web-Server
-    - Web-Common-Http
-    state: present
-    include_sub_features: yes
-    include_management_tools: yes
-  register: win_feature
+    - name: Install IIS Web-Server with sub features and management tools
+      win_feature:
+        name: 
+        - Web-Server
+        - Web-Common-Http
+        state: present
+        include_sub_features: yes
+        include_management_tools: yes
+      register: win_feature
 
-- name: Reboot if installing Web-Server feature requires it
-  ansible.windows.win_reboot:
-  when: win_feature.reboot_required
+    - name: Reboot if installing Web-Server feature requires it
+      win_reboot:
+      when: win_feature.reboot_required
+  
+    - name: Acme IIS site
+      win_iis_website:
+        name: Acme
+        state: started
+        port: 80
+        ip: 127.0.0.1
+        hostname: acme.local
+        application_pool: acme
+        physical_path: C:\sites\acme
+        parameters: logfile.directory:C:\sites\logs
+      register: website
