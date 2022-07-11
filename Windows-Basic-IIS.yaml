@@ -1,6 +1,6 @@
 ---
 - name: Install IIS
-  hosts: windows
+  hosts: all
   gather_facts: true
   tasks:
    - win_feature:
