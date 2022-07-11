@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   tasks:
-  - name: Set Access List
-    commscope.icx.icx_command:
-      commands:
-        - ip access-list standard 1 sequence 10 deny host 192.168.40.2
+    - name: Set Access List
+      commscope.icx.icx_command:
+        commands:
+          - ip access-list standard 1 sequence 10 deny host 192.168.40.2
