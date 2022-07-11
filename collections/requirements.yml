@@ -1,3 +1,4 @@
 ---
 collections:
+  - name: chocolatey.chocolatey
   - name: community.network
