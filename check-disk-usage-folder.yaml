@@ -1,6 +1,7 @@
 ---
 - name: Check Disk Space Usage
   hosts: all
+  gather_facts: no
   tasks:
           - name: Disk usage from command module
             command: du -sh "{{ var_dir }}"
