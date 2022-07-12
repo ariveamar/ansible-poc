@@ -1,3 +1,8 @@
+---
+- name: Windows Director Deny Permission
+  hosts: all
+  become: false
+  gather_facts: false
 - name: Deny Intern
   win_acl:
     path: C:\Administrator\Documents
