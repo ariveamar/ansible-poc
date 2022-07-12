@@ -3,8 +3,8 @@
   gather_facts: no
   hosts: all
   tasks:
-- name: Firewall rule to allow RDP on TCP port 3389
-  community.windows.win_firewall_rule:
+- name: Firewall rule to allow HTTP on TCP port 80
+  win_firewall_rule:
     name: Remote Desktop
     localport: 80
     action: deny
