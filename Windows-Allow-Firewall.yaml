@@ -3,16 +3,16 @@
   gather_facts: no
   hosts: all
   tasks:
-- name: Firewall rule to allow Wesbite on TCP port 80
-  win_firewall_rule:
-    name: Website
-    localport: 80
-    action: allow
-    direction: in
-    protocol: tcp
-    profiles: 
-    - private
-    - domain
-    - public
-    state: present
-    enabled: yes
+    - name: Firewall rule to allow Wesbite on TCP port 80
+      win_firewall_rule:
+        name: Website
+        localport: 80
+        action: allow
+        direction: in
+        protocol: tcp
+        profiles: 
+        - private
+        - domain
+        - public
+        state: present
+        enabled: yes
