@@ -28,3 +28,8 @@
         physical_path: C:\sites\acme
         parameters: logfile.directory:C:\sites\logs
       register: website
+    - name: Remove Default Web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
+
