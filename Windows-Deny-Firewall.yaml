@@ -7,7 +7,7 @@
       win_firewall_rule:
         name: Remote Desktop
         localport: 80
-        action: deny
+        action: block
         direction: in
         protocol: tcp
         profiles: 
