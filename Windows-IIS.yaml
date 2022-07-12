@@ -16,17 +16,32 @@
     - name: Reboot if installing Web-Server feature requires it
       win_reboot:
       when: win_feature.reboot_required
-  
+      
+    - name: Create folder website
+      win_file:
+        path: C:\sites\ansible
+        state: directory
+    - name: Create file index.html 
+      win_file:
+        path: C:\sites\ansible\index.html
+        state: touch
+    - name: Config File html
+      community.windows.win_lineinfile:
+        path: C:\sites\ansible\index.html
+        line: POC Ansible
+        newline: windows
+ 
     - name: Acme IIS site
       win_iis_website:
-        name: acme
+        name: ansible
         state: started
         port: 80
         ip: '*'
-        hostname: localhost
-        application_pool: acme
-        physical_path: C:\sites\acme
+        hostname: www.ansible.local
+        application_pool: ansible
+        physical_path: C:\sites\ansible
       register: website
+      
     - name: Remove Default Web Site
       win_iis_website:
         name: "Default Web Site"
