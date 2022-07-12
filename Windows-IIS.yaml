@@ -19,12 +19,12 @@
   
     - name: Acme IIS site
       win_iis_website:
-        name: Acme
+        name: acme
         state: started
         port: 80
-        ip: 10.8.156.252
+        ip: '*'
         hostname: localhost
-        application_pool: web-test
+        application_pool: acme
         physical_path: C:\sites\acme
       register: website
     - name: Remove Default Web Site
