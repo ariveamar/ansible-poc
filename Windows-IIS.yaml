@@ -23,7 +23,7 @@
         state: started
         port: 80
         ip: 10.8.156.252
-        hostname: acme.local
+        hostname: localhost
         application_pool: web-test
         physical_path: C:\sites\acme
         parameters: logfile.directory:C:\sites\logs
