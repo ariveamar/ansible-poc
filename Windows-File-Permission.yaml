@@ -1,7 +1,7 @@
 - name: Deny Intern
   win_acl:
     path: C:\Administrator\Documents
-    user: automation
+    user: user-test
     rights: Read,Write,Modify,FullControl,Delete
     type: deny
     state: present
