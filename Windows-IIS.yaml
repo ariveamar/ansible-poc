@@ -33,14 +33,13 @@
  
     - name: Acme IIS site
       win_iis_website:
-        name: ansible
+        name: acme
         state: started
         port: 80
         ip: '*'
         hostname: www.ansible.local
-        application_pool: ansible
+        application_pool: acme
         physical_path: C:\sites\ansible
-      register: website
       
     - name: Remove Default Web Site
       win_iis_website:
