@@ -26,7 +26,7 @@
         path: C:\sites\ansible\index.html
         state: touch
     - name: Config File html
-      community.windows.win_lineinfile:
+      win_lineinfile:
         path: C:\sites\ansible\index.html
         line: POC Ansible
         newline: windows
