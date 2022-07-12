@@ -1,5 +1,5 @@
 ---
-- name: Windows Director Deny Permission
+- name: Windows Directory Deny Permission
   hosts: all
   become: false
   gather_facts: false
