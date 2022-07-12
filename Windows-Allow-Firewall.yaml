@@ -3,9 +3,9 @@
   gather_facts: no
   hosts: all
   tasks:
-- name: Firewall rule to allow RDP on TCP port 3389
+- name: Firewall rule to allow Wesbite on TCP port 80
   community.windows.win_firewall_rule:
-    name: Remote Desktop
+    name: Website
     localport: 80
     action: allow
     direction: in
