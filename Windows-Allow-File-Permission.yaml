@@ -3,10 +3,11 @@
   hosts: all
   become: false
   gather_facts: false
-- name: Deny Intern
-  win_acl:
-    path: C:\Administrator\Documents
-    user: user-test
-    rights: Read,Write,Modify,FullControl,Delete
-    type: allow
-    state: present
+  tasks:
+    - name: Deny Intern
+      win_acl:
+        path: C:\Administrator\Documents
+        user: user-test
+        rights: Read,Write,Modify,FullControl,Delete
+        type: allow
+        state: present
