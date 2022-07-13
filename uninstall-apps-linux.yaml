@@ -1,5 +1,9 @@
-
-- name: remove the Apache package
-  yum:
-    name: httpd
-    state: absent
+---
+- name: Uninstall RPM Linux
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: remove the Apache package
+      yum:
+        name: httpd
+        state: absent
