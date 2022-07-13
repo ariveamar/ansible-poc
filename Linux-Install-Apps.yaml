@@ -1,0 +1,9 @@
+---
+- name: Install RPM Linux
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install the Apache package
+      yum:
+        name: httpd
+        state: present
