@@ -3,7 +3,6 @@
   hosts: all
   gather_facts: no
   become: yes
-  become_user: automation
   tasks:
     - name: Install the Apache package
       yum:
