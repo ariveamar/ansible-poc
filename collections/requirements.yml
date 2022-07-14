@@ -1,4 +1,4 @@
 ---
 collections:
   - name: chocolatey.chocolatey
-  - name: community.network
+  - name: commscope.icx
