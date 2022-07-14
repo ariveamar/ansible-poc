@@ -1,17 +1,12 @@
 ---
-- name: Comscope Add VLAN
-  hosts: all
+- hosts: all
   gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: icx
+    ansible_become: true
+    ansible_become_method: enable
+    ansible_user: super
+    ansible_password: P@ssw0rd
   tasks:
-    - name: Create vlan 91
-      community.network.icx_config:
-        vlan_id: 91
-        ip_arp_inspection: present
-        purge: present
-    - name: Add a single ethernet 1/1/24 as access(untagged) port to vlan 91
-      community.network.icx_config:
-        name: test-vlan
-        vlan_id: 91
-        interfaces:
-          name:
-            - ethernet 1/1/24
+    commscope.icx.icx_command: show version
