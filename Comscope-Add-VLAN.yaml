@@ -15,4 +15,4 @@
       commscope.icx.icx_vlan:
         vlan_id: 222
         ip_arp_inspection: present
-        purge: present
+        purge: true
