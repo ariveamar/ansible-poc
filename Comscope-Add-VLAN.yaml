@@ -7,6 +7,7 @@
     ansible_become: true
     ansible_become_method: enable
     ansible_user: super
-    ansible_password: P@ssw0rd
+    ansible_password: 'P@ssw0rd'
   tasks:
-    commscope.icx.icx_command: show version
+    commscope.icx.icx_command:
+      commands: show version
