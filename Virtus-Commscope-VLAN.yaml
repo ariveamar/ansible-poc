@@ -1,0 +1,19 @@
+---
+- name: Comscope Test 
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: icx
+    ansible_become: true
+    ansible_become_method: enable
+    ansible_user: super
+    ansible_password: 'P@ssw0rd'
+  tasks:
+    - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
+      commscope.icx.icx_vlan:
+        name: test-vlan
+        vlan_id: 2
+        interfaces:
+          name:
+            - ethernet 1/1/20
