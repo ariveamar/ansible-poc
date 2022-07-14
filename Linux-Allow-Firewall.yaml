@@ -3,8 +3,8 @@
   gather_facts: no
   hosts: all
   tasks:
-- name: Allow HTTP on Firewalld
-  ansible.posix.firewalld:
-    service: http
-    permanent: yes
-    state: enabled
+    - name: Allow HTTP on Firewalld
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
