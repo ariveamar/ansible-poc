@@ -13,6 +13,8 @@
   tasks:
     - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
       commscope.icx.icx_vlan:
-        vlan_id: 222
-        ip_arp_inspection: true
-        purge: true
+        name: test-vlan
+        vlan_id: 100
+        interfaces:
+          name:
+            - ethernet 1/1/2
