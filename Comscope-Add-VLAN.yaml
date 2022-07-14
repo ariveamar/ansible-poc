@@ -7,8 +7,9 @@
     ansible_network_os: icx
     ansible_become: true
     ansible_become_method: enable
-    ansible_user: super
-    ansible_password: 'P@ssw0rd'
+    ansible_user: ansible
+    ansible_password: 'Siloam@guest'
+    ansible_become_password: 's1lo4m'
   tasks:
     - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
       commscope.icx.icx_vlan:
@@ -17,4 +18,3 @@
         interfaces:
           name:
             - ethernet 1/1/20
-
