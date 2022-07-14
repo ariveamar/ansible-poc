@@ -3,8 +3,12 @@
   gather_facts: no
   hosts: all
   tasks:
-    - name: Allow HTTP on Firewalld
-      ansible.posix.firewalld:
-        service: http
+    - name: FirewallD rules
+      firewalld:
         permanent: yes
+        immediate: yes
+        service: "{{ item }}"
         state: enabled
+      with_items:
+       - http
+       - https
