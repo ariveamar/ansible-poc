@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Comscope Test 
+  hosts: all
   gather_facts: no
   connection: network_cli
   vars:
