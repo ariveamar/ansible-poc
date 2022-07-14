@@ -10,5 +10,11 @@
     ansible_user: super
     ansible_password: 'P@ssw0rd'
   tasks:
-    commscope.icx.icx_command:
-      commands: show version
+    - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
+      commscope.icx.icx_vlan:
+        name: test-vlan
+        vlan_id: 2
+        interfaces:
+          name:
+            - ethernet 1/1/20
+
