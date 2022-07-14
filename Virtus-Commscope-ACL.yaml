@@ -10,6 +10,7 @@
     ansible_user: super
     ansible_password: 'P@ssw0rd'
   tasks:
+    commscope.icx.icx_command:
     commands:
       - show version
       - show interfaces
