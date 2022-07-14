@@ -1,0 +1,18 @@
+---
+- name: Comscope Test 
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: icx
+    ansible_become: true
+    ansible_become_method: enable
+    ansible_user: super
+    ansible_password: 'P@ssw0rd'
+  tasks:
+    commands:
+      - show version
+      - show interfaces
+    register: test
+    debug:
+      var: test
