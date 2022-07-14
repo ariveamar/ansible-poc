@@ -14,7 +14,7 @@
     - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
       commscope.icx.icx_vlan:
         name: test-vlan
-        vlan_id: 2
+        vlan_id: 91
         interfaces:
           name:
-            - ethernet 1/1/20
+            - ethernet 1/1/2
