@@ -1,0 +1,8 @@
+# cat roles/gce/vars/instance_main.yml
+# gce
+instance_name: test-instance1
+zone: us-central1-f 
+machine_type: n1-standard-1
+service_account_email: YOUR_SERVICEACCOUNT@YOUR_PROJECT_ID.iam.gserviceaccount.com
+service_account_file: ../YOUR_PROJECT.json
+project: YOUR_PROJECT_NAME
