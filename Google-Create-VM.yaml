@@ -12,7 +12,7 @@
      gcp_compute_disk:
          name: 'disk-instance'
          size_gb: 50
-         source_image: 'projects/centos-cloud/global/licenses/centos-7'
+         source_image: 'centos-7-v20220621'
          zone: "{{ zone }}"
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_cred_kind }}"
