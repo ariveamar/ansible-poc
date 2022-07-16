@@ -8,16 +8,6 @@
       region: "asia-southeast2"
 
   tasks:
-   - name: create a disk
-     gcp_compute_disk:
-         name: 'disk-instance'
-         size_gb: 50
-         source_image: 'centos-7-v20220621'
-         zone: "{{ zone }}"
-         project: "{{ gcp_project }}"
-         auth_kind: "{{ gcp_cred_kind }}"
-         state: present
-     register: disk
    - name: create a address
      gcp_compute_address:
          name: 'address-instance'
@@ -34,7 +24,8 @@
          disks:
            - auto_delete: true
              boot: true
-             source: "{{ disk }}"
+             initialize_params:
+               source_image: "projects/rocky-linux-cloud/global/images/rocky-linux-8-v20220126" 
          network_interfaces:
              - network: null # use default
                access_configs:
