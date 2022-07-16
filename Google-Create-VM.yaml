@@ -2,6 +2,8 @@
   hosts: localhost
   gather_facts: no
   vars:
+      gcp_project: vti-dev
+      gcp_cred_kind: serviceaccount
       zone: "asia-southeast2-a"
       region: "asia-southeast2"
 
@@ -12,16 +14,16 @@
          size_gb: 50
          source_image: 'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
          zone: "{{ zone }}"
-         scopes:
-           - https://www.googleapis.com/auth/compute
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_cred_kind }}"
          state: present
      register: disk
    - name: create a address
      gcp_compute_address:
          name: 'address-instance'
          region: "{{ region }}"
-         scopes:
-           - https://www.googleapis.com/auth/compute
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_cred_kind }}"
          state: present
      register: address
    - name: create a instance
@@ -40,5 +42,6 @@
                    nat_ip: "{{ address }}"
                    type: 'ONE_TO_ONE_NAT'
          zone: "{{ zone }}"
-         scopes:
-           - https://www.googleapis.com/auth/compute
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_cred_kind }}"
+         service_account_file: "{{ gcp_cred_file }}"
