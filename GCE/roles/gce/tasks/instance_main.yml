@@ -1,10 +1,9 @@
-#  cat roles/gce/tasks/instance_main.yml
 ---
 - name: create a instance
   gce_instance:
-      instance_names: "ansible-vm"
-      zone: "asia-southeast2-a"
-      machine_type: "e2-micro"
+      instance_names: "{{instance_name}}"
+      zone: "{{zone}}"
+      machine_type: "{{ machine_type }}"
       image: debian-8
       state: present
       disk_size: 20
