@@ -3,3 +3,6 @@
 instance_name: vm-ansible
 zone: asia-southeast2-a
 machine_type: e2-micro"
+service_account_email:  ansible-26@vti-dev-140322.iam.gserviceaccount.com
+service_account_file: /gcp/ansible-gcp.json
+project: vti-dev-140322
