@@ -1,0 +1,12 @@
+---
+- name: Install RPM Linux
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: nmcli add Ethernet - conn_name only & ip4 gw4
+      nmcli:
+        type: ethernet
+        conn_name: ens224
+        ip4: '{{ var_ip }}'
+        gw4: '{{ var_gw }}'
+        state: present
