@@ -30,6 +30,10 @@
         path: C:\sites\ansible\index.html
         line: POC Ansible
         newline: windows
+    - name: Create a new application pool 
+      win_iis_webapppool:
+        name: acme
+        state: started
  
     - name: Acme IIS site
       win_iis_website:
