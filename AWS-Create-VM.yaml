@@ -6,7 +6,7 @@
   vars:
       region: ap-southeast-1
       instance_type: t2.micro
-      ami: ami-0de62f6e
+      ami: ami-02ee763250491e04a
       keypair: ansible-key # pem file name
       subnetid: subnet-0e3221d17688f263e
   
