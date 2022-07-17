@@ -3,9 +3,9 @@
   hosts: all
   gather_facts: false
   tasks:
-   - name: Run basic PowerShell script
-     win_powershell:
-       ansible.windows.win_powershell:
-         Force: true
-         script: |
-           New-NetIPAddress -InterfaceIndex “18” -IPAddress 10.8.156.88 -PrefixLength 24 -DefaultGateway 10.8.156.1
+    - name: Run basic PowerShell script
+      win_powershell:
+        ansible.windows.win_powershell:
+          Force: true
+          script: |
+            New-NetIPAddress -InterfaceIndex “18” -IPAddress 10.8.156.88 -PrefixLength 24 -DefaultGateway 10.8.156.1
