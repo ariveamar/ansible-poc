@@ -14,6 +14,8 @@
 
     - name: Create an ec2 instance
       ec2:
+         aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+         aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
          key_name: "{{ keypair }}"
          group: sg-060c88638d21099c4  # security group name
          instance_type: "{{ instance_type }}"
