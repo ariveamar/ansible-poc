@@ -22,4 +22,13 @@
       assert:
         that:
           - "vm_result.changed"
+    - name: Poweron virtual machine name {{ vm_name1 }}
+      vmware_guest_powerstate:
+        name: "{{ vm_name1 }}"
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: False
+        folder: "{{ folder }}"
+        state: powered-on
 
