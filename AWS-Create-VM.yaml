@@ -4,7 +4,7 @@
   gather_facts: False
 
   vars:
-      region: us-east-1
+      region: ap-southeast-1
       instance_type: t2.micro
       ami: ami-0dba2cb6798deb6d8  # Ubuntu 20.04 LTS
       keypair: ansible-key # pem file name
