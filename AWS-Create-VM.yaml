@@ -1,2 +1,30 @@
 ---
-- hosts:
+- name: Create a new Demo EC2 instance
+  hosts: localhost
+  gather_facts: False
+
+  vars:
+      region: us-east-1
+      instance_type: t2.micro
+      ami: ami-0dba2cb6798deb6d8  # Ubuntu 20.04 LTS
+      keypair: ansible-key # pem file name
+      subnetid: subnet-0e3221d17688f263e
+  
+  tasks:
+
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         group: sg-060c88638d21099c4  # security group name
+         instance_type: "{{ instance_type }}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 1  # default
+         count_tag:
+            Name: Ansible-VM
+         instance_tags:
+            Name: Ansible-VM
+         vpc_subnet_id: "{{ subnetid }}"
+         assign_public_ip: yes
+      register: ec2
