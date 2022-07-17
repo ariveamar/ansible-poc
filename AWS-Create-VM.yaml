@@ -6,7 +6,7 @@
   vars:
       region: ap-southeast-1
       instance_type: t2.micro
-      ami: ami-0dba2cb6798deb6d8  # Ubuntu 20.04 LTS
+      ami: ami-0de62f6e
       keypair: ansible-key # pem file name
       subnetid: subnet-0e3221d17688f263e
   
