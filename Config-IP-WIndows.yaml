@@ -5,6 +5,5 @@
   tasks:
     - name: Run basic PowerShell script
       ansible.windows.win_powershell:
-        Force: true
         script: |
           New-NetIPAddress -InterfaceIndex “18” -IPAddress 10.8.156.88 -PrefixLength 24 -DefaultGateway 10.8.156.1
