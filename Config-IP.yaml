@@ -1,5 +1,5 @@
 ---
-- name: Install RPM Linux
+- name: Config IP Linux
   hosts: all
   gather_facts: no
   tasks:
