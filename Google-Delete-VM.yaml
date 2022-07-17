@@ -6,7 +6,8 @@
       gcp_cred_kind: serviceaccount
       zone: "asia-southeast2-a"
       region: "asia-southeast2"
-   - name: create a instance
-     gcp_compute_instance:
-         state: absent
-         name: Ansible-vm
+  tasks:
+    - name: create a instance
+      gcp_compute_instance:
+        state: absent
+        name: Ansible-vm
