@@ -1,9 +1,24 @@
 ---
-- name: Comscope Set ACL 
+- name: Comscope Test 
   hosts: all
   gather_facts: no
-  collections:
-    - name: community.network
+  connection: network_cli
+  vars:
+    ansible_network_os: icx
+    ansible_become: true
+    ansible_become_method: enable
+    ansible_user: ansible
+    ansible_password: 'Siloam@guest'
+    ansible_become_password: 's1lo4m'
   tasks:
-    - name: Set Access List
-      community.network.icx_command: show version
+    - name: Config ACL
+      commscope.icx.icx_config:
+        lines:
+          - access-list 1 deny host 10.157.22.26 log
+          - access-list 1 deny 10.157.29.12 log
+          - access-list 1 permit any
+    - name: Apply ACL to Interface
+      commscope.icx.icx_config:
+        lines:
+          - ip access-group 1 in
+        parents: vlan 91
