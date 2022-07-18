@@ -1,7 +1,7 @@
 ---
 - name: Comscope Test 
   hosts: all
-  gather_facts: no
+  gather_facts: true
   connection: network_cli
   vars:
     ansible_network_os: icx
@@ -10,6 +10,7 @@
     ansible_user: ansible
     ansible_password: 'P@ssw0rd'
     ansible_become_password: 'P@ssw0rd'
+    ansible_persistent_command_timeout: 300 
   tasks:
     - name: Enable Interface
       commscope.icx.icx_config:
