@@ -21,4 +21,4 @@
       commscope.icx.icx_config:
         lines:
           - ip access-group 1 in
-        parents: vlan 91
+        parents: vlan 400
