@@ -10,6 +10,11 @@
     ansible_user: super
     ansible_password: 'P@ssw0rd'
   tasks:
+    - name: Enable Interface
+      commscope.icx.icx_config:
+        lines:
+          - enable
+        parents: interface ethernet 1/1/16
     - name: Config ACL
       commscope.icx.icx_config:
         defaults: yes
