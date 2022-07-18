@@ -10,6 +10,18 @@
     ansible_user: super
     ansible_password: 'P@ssw0rd'
   tasks:
-    - commscope.icx.icx_command: 
-        commands: show version
-
+    - name: Config ACL
+      commscope.icx.icx_config:
+        defaults: no
+        lines:
+          - sequence 5 deny tcp any any eq 5985
+          - sequence 10 deny tcp any any eq 5986
+          - sequence 15 deny udp any any eq 5985
+          - sequence 20 deny udp any any eq 5986
+        parents: ip access-list extended BLOCK_SOC
+    - name: Apply ACL to VLAN
+      commscope.icx.icx_config:
+        defaults: no
+        lines:
+          - ip access-group BLOCK_SOC out
+        parents: interface ve 2
