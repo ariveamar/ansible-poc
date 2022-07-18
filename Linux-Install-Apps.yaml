@@ -5,9 +5,5 @@
   tasks:
     - name: Install the Apache package
       yum:
-        name: httpd
+        name: snmpd
         state: present
-    - name: enable service httpd
-      service:
-        name: httpd
-        state: started
