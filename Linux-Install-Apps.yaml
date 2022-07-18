@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Install the Apache package
+    - name: Install the package
       yum:
         name: snmpd
         state: present
