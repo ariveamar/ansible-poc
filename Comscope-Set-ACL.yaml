@@ -12,8 +12,8 @@
     ansible_become_password: 's1lo4m'
   tasks:
     - name: Config ACL
-      defaults: no
       commscope.icx.icx_config:
+        defaults: no
         lines:
           - sequence 5 deny tcp any any eq 5985
           - sequence 10 deny tcp any any eq 5986
@@ -21,8 +21,8 @@
           - sequence 20 deny udp any any eq 5986
         parents: ip access-list extended BLOCK_SOC
     - name: Apply ACL to VLAN
-      defaults: no
       commscope.icx.icx_config:
+        defaults: no
         lines:
           - ip access-group BLOCK_SOC out
         parents: interface ve 2
