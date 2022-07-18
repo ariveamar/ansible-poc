@@ -20,7 +20,6 @@
         parents: interface ethernet 1/1/16
     - name: Config ACL
       commscope.icx.icx_config:
-        defaults: yes
         lines:
           - sequence 5 deny tcp any any eq 5985
           - sequence 10 deny tcp any any eq 5986
@@ -29,7 +28,6 @@
         parents: ip access-list extended BLOCK_SOC
     - name: Apply ACL to VLAN
       commscope.icx.icx_config:
-        defaults: yes
         lines:
           - ip access-group BLOCK_SOC out
         parents: interface ve 2
