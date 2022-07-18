@@ -22,9 +22,9 @@
          region: "{{ region }}"
          count: 1  # default
          count_tag:
-            Name: Ansible-VM
+            Name: "{{ var_name }}"
          instance_tags:
-            Name: Ansible-VM
+            Name: "{{ var_name }}"
          vpc_subnet_id: "{{ subnetid }}"
          assign_public_ip: yes
       register: ec2
