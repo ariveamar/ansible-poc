@@ -2,7 +2,7 @@
 - name: Windows Directory Allow Permission
   hosts: all
   become: false
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Deny Intern
       win_acl:
