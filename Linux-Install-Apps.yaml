@@ -5,5 +5,5 @@
   tasks:
     - name: Install the package
       yum:
-        name: snmpd
+        name: net-snmp
         state: present
