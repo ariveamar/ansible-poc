@@ -11,10 +11,9 @@
     ansible_password: 'Siloam@guest'
     ansible_become_password: 's1lo4m'
   tasks:
-    - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
+    - name: Add a single ethernet as tagged port to vlan
       commscope.icx.icx_vlan:
-        name: test-vlan
         vlan_id: 91
         interfaces:
           name:
-            - ethernet 1/1/4
+            - ethernet 7/1/24
