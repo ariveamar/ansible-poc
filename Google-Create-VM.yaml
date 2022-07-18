@@ -19,7 +19,7 @@
    - name: create a instance
      gcp_compute_instance:
          state: present
-         name: Ansible-vm
+         name: ansiblevm
          machine_type: "e2-micro"
          disks:
            - auto_delete: true
