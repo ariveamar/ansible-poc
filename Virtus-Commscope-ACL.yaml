@@ -4,6 +4,9 @@
   gather_facts: no
   connection: network_cli
   vars:
+    ansible_terminal_stdout_re:
+      - pattern: '[\r\n]?[\w\+\-\.:\/\[\]]+(?:\([^\)]+\)){0,3}(?:[>#]) ?$'
+      - pattern: '[\r\n]?'  # In order to handle a blank line
     ansible_network_os: icx
     ansible_become: true
     ansible_become_method: enable
