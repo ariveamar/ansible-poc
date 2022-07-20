@@ -6,7 +6,7 @@
   tasks:
     - name: Deny Intern
       win_acl:
-        path: C:\automation
+        path: C:\Users\automation
         user: user-test
         rights: Read,Write,Modify,FullControl,Delete
         type: allow
