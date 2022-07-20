@@ -7,7 +7,7 @@
     ansible_network_os: icx
     ansible_become: true
     ansible_become_method: enable
-    ansible_user: ansible
+    ansible_user: super
     ansible_password: 'P@ssw0rd'
     ansible_become_password: 'P@ssw0rd'
     ansible_persistent_command_timeout: 300 
