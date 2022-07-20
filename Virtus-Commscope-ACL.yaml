@@ -10,8 +10,6 @@
     ansible_user: super
     ansible_password: 'P@ssw0rd'
     ansible_become_password: 'P@ssw0rd'
-    ansible_persistent_command_timeout: 300 
-    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
     - name: Enable Interface
       commscope.icx.icx_config:
