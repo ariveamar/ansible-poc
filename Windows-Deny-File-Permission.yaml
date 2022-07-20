@@ -9,5 +9,5 @@
         path: C:\LocalFiles
         user: user-test
         rights: Read,Write,Modify,FullControl,Delete
-        type: deny
-        state: present
+        type: allow
+        state: absent
