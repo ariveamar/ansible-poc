@@ -6,7 +6,7 @@
   tasks:
     - name: Deny Intern
       win_acl:
-        path: C:\Users\Administrator\Documents
+        path: C:\LocalFiles
         user: user-test
         rights: Read,Write,Modify,FullControl,Delete
         type: deny
