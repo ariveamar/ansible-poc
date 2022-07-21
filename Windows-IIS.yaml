@@ -11,6 +11,7 @@
         state: present
         include_sub_features: yes
         include_management_tools: yes
+        source: D:\sources\sxs
       register: win_feature
 
     - name: Reboot if installing Web-Server feature requires it
