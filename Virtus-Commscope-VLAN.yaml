@@ -13,8 +13,8 @@
   tasks:
     - name: Add a single ethernet 1/1/48 as access(untagged) port to vlan 20
       commscope.icx.icx_vlan:
-        name: test-vlan
-        vlan_id: 60
-        interfaces:
+        name: "{{ var_name }}"
+        vlan_id: "{{ var_vlanid }}"
+        tagged:
           name:
-            - ethernet 1/1/24
+            - "{{ var_interface }}"
