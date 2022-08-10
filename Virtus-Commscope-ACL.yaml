@@ -2,7 +2,7 @@
 - name: Comscope Test 
   hosts: all
   gather_facts: true
-  connection: network_cli
+  connection: ansible.netcommon.network_cli
   vars:
     ansible_network_os: icx
     ansible_become: true
@@ -12,12 +12,12 @@
     ansible_become_password: 'P@ssw0rd'
   tasks:
     - name: Enable Interface
-      commscope.icx.icx_config:
+      community.network.icx_config:
         lines:
           - enable
         parents: interface ethernet 1/1/16
     - name: Config ACL
-      commscope.icx.icx_config:
+      community.network.icx_config:
         lines:
           - sequence 5 deny tcp any any eq 5985
           - sequence 10 deny tcp any any eq 5986
@@ -25,7 +25,7 @@
           - sequence 20 deny udp any any eq 5986
         parents: ip access-list extended BLOCK_SOC
     - name: Apply ACL to VLAN
-      commscope.icx.icx_config:
+      community.network.icx_config:
         lines:
           - ip access-group BLOCK_SOC out
         parents: interface ve 2
