@@ -5,5 +5,5 @@
   tasks:
     - name: Install the package
       yum:
-        name: net-snmp
+        name: httpd
         state: present
