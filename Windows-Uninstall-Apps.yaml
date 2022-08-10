@@ -10,4 +10,6 @@
     - name: Uninstall packages
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ packages }}"
+        remove_dependencies: yes
+        skip_scripts: no
         state: absent
