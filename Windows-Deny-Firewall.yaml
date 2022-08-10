@@ -3,10 +3,10 @@
   gather_facts: no
   hosts: all
   tasks:
-    - name: Firewall rule to allow HTTP on TCP port 80
+    - name: Firewall rule to deny HTTPS on TCP port 443
       win_firewall_rule:
         name: Remote Desktop
-        localport: 80
+        localport: 443
         action: block
         direction: in
         protocol: tcp
