@@ -2,10 +2,10 @@
 - name: win_chocolatey module demo
   hosts: all
   become: false
-  gather_facts: false
+  gather_facts: true
   vars:
     - packages:
-      - notepadplusplus
+      - putty
   tasks:
     - name: install packages
       chocolatey.chocolatey.win_chocolatey:
