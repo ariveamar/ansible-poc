@@ -5,7 +5,7 @@
   gather_facts: false
   vars:
     - packages:
-      - notepadplusplus
+      - putty
   tasks:
     - name: Uninstall packages
       chocolatey.chocolatey.win_chocolatey:
