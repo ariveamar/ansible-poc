@@ -11,16 +11,17 @@
     ansible_password: 'P@ssw0rd'
     ansible_become_password: 'P@ssw0rd'
   tasks:
-    - name: Config ACL
-      commscope.icx.icx_config:
-        lines:
-          - sequence 5 deny tcp any any eq 5985
-          - sequence 10 deny tcp any any eq 5986
-          - sequence 15 deny udp any any eq 5985
-          - sequence 20 deny udp any any eq 5986
-        parents: ip access-list extended BLOCK_SOC
-    - name: Apply ACL to VLAN
-      commscope.icx.icx_config:
-        lines:
-          - ip access-group BLOCK_SOC out
-        parents: interface ve 2
+    - name: create ipv4 acl and add rules
+      commscope.icx.icx_acl_ip:
+        acl_type: extended
+        acl_id: 112
+        extended_rules:
+          - rule_type: deny
+            ip_protocol_name: tcp
+            source:
+              host: yes
+              ip_address: 1.1.1.1
+            destination:
+              any: yes
+            precedence: routine
+            state: absent
