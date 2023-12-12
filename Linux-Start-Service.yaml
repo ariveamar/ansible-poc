@@ -1,0 +1,10 @@
+---
+- name: Install RPM Linux
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        enabled: true
+        state: started
