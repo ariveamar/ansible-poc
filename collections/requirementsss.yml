@@ -1,5 +1,5 @@
 ---
 collections:
   - name: chocolatey.chocolatey
-  - name: commscope.icx
-  - name: amazon.aws
+#  - name: commscope.icx
+#  - name: amazon.aws
