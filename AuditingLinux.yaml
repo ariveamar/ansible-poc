@@ -1,1 +1,38 @@
 
+---
+- name: Audit SSH Configuration on Linux
+  hosts: all
+  become: yes
+  vars:
+    sshd_config_path: /etc/ssh/sshd_config
+    expected_ssh_port: 2424
+
+  tasks:
+    - name: Check if root login is disabled in sshd_config
+      ansible.builtin.command: "grep -Ei '^\\s*PermitRootLogin\\s+no' {{ sshd_config_path }}"
+      register: root_login_check
+      ignore_errors: yes
+
+    - name: Check if SSH is listening on port {{ expected_ssh_port }}
+      ansible.builtin.shell: |
+        ss -tuln | grep ":{{ expected_ssh_port }} "
+      register: ssh_port_check
+      ignore_errors: yes
+
+    - name: Display root login audit result
+      ansible.builtin.debug:
+        msg: >
+          {% if root_login_check.rc == 0 %}
+            ✅ Root login via SSH is disabled (PermitRootLogin no).
+          {% else %}
+            ❌ Root login via SSH is NOT disabled or setting not found.
+          {% endif %}
+
+    - name: Display SSH port audit result
+      ansible.builtin.debug:
+        msg: >
+          {% if ssh_port_check.rc == 0 %}
+            ✅ SSH is listening on port {{ expected_ssh_port }}.
+          {% else %}
+            ❌ SSH is NOT listening on port {{ expected_ssh_port }}.
+          {% endif %}
