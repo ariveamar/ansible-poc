@@ -1,1 +1,33 @@
+---
+- name: Block multiple URLs on Fortigate loaded from a CSV file
+  hosts: localhost
+  connection: local
+  gather_facts: no
 
+  vars:
+    vdom: "root"
+    fortigate_host:  "{{ forti_host }}"
+    fortigate_token: "{{ ansible_password }}"
+    webfilter_profile_name: "blocked_urls_profile"
+    blocked_urls_csv_path: "blocked_urls.csv"  # CSV file path
+
+  tasks:
+    - name: Read blocked URLs from CSV file
+      community.general.read_csv:
+        path: "{{ blocked_urls_csv_path }}"
+      register: csv_data
+
+    - name: Create urlfilter list from CSV data
+      set_fact:
+        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': item.0 + 1, 'url': item.1.url, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
+      loop: "{{ csv_data.list | enumerate }}"
+
+    - name: Configure web filter URL filter profile with URLs from CSV
+      fortinet.fortios.fortios_webfilter_urlfilter:
+        access_token: "{{ fortigate_token }}"
+        vdom: "{{ vdom }}"
+        state: "present"
+        webfilter_urlfilter:
+          name: "{{ webfilter_profile_name }}"
+          comment: "Profile to block multiple URLs from CSV"
+          urlfilter: "{{ urlfilter_list }}"
