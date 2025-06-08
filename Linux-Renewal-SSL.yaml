@@ -9,7 +9,8 @@
   tasks:
     - name: Copy SSL certificate to server
       ansible.builtin.copy:
-        remote_src: "{{ ssl_cert_source_list_file }}"
+        remote_src: yes
+        src: "{{ ssl_cert_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/ssl-cert.pem"
         owner: root
         group: root
@@ -17,7 +18,8 @@
 
     - name: Copy SSL private key to server
       ansible.builtin.copy:
-        remote_src: "{{ ssl_key_source_list_file }}"
+        remote_src: yes
+        src: "{{ ssl_key_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/ssl-key.pem"
         owner: root
         group: root
