@@ -47,6 +47,7 @@
         rights: Read,Write,Modify,FullControl,Delete
         state: absent
         recurse: yes
+        type: allow
 #      loop: "{{ folders_with_everyone }}"
       register: remove_permissions_result
 
