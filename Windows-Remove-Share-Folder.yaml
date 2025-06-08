@@ -22,6 +22,8 @@
         path: "{{ item.path }}"
         user: "Everyone"
         state: present
+        rights: Read,Write,Modify,FullControl,Delete
+        type: allow
       register: acl_check
       loop: "{{ found_directories.files }}"
       ignore_errors: yes
