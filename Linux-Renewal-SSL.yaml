@@ -4,8 +4,8 @@
   become: yes
   vars:
     ssl_destination_dir: /etc/nginx/ssl
-    ssl_cert_source_list_file: /secret/ssl-cert.pem  # Local control machine path to text file
-    ssl_key_source_list_file: /secret/ssl-key.pem
+    #ssl_cert_source_list_file: /secret/ssl-cert.pem  # Local control machine path to text file
+    #ssl_key_source_list_file: /secret/ssl-key.pem
   tasks:
     - name: Copy SSL certificate to server
       ansible.builtin.copy:
