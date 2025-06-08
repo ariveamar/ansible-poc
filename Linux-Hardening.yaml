@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    ssh_port: 2424
+    new_ssh_port: 2424
     sshd_config_path: /etc/ssh/sshd_config
     csv_path: /tmp
     csv_filename: report.csv
@@ -19,28 +19,32 @@
         backrefs: yes
         create: yes
       notify: Restart sshd
+    - name: Update SSH config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?Port '
+        line: 'Port {{ new_ssh_port }}'
 
-    - name: Change SSH port to {{ ssh_port }}
-      ansible.builtin.lineinfile:
-        path: "{{ sshd_config_path }}"
-        regexp: '^#?Port\s+'
-        line: "Port {{ ssh_port }}"
-        state: present
-        backrefs: yes
-        create: yes
-      notify: Restart sshd
+#    - name: Allow new SSH port in firewall
+#      firewalld:
+#        port: "{{ new_ssh_port }}/tcp"
+#        permanent: yes
+#        state: enabled
+#        notify: Reload Firewall
+#      when: "'firewalld' in ansible_facts.services"
 
-  handlers:
-    - name: Restart sshd
-      ansible.builtin.service:
+    - name: Update SELinux to allow new SSH port
+      command: "semanage port -a -t ssh_port_t -p tcp {{ new_ssh_port }}"
+      ignore_errors: yes  # In case SELinux isn't enforcing
+
+    - name: restart sshd
+      service:
         name: sshd
         state: restarted
+
     - name: change ssh port
       set_fact:
-        ansible_port: "{{ ssh_port }}"
-
-    - name: test connection
-      ping:
+        ansible_port: "{{ new_ssh_port }}"
 
     - name: generate csv report file
       lineinfile:
@@ -53,6 +57,6 @@
     - name: insert data to report
       lineinfile:
         dest: "{{ csv_path }}/{{ csv_filename }}"
-        line: "{{ inventory_hostname }},22,{{ ssh_port }}"
+        line: "{{ inventory_hostname }},22,{{ new_ssh_port }}"
         create: true
         state: present
