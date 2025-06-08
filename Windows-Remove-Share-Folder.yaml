@@ -44,7 +44,7 @@
 
     - name: Remove 'Everyone' permissions from folders found
       ansible.windows.win_acl:
-      path:  "{{ item }}"
+        path:  "{{ item }}"
 #        path: "C:\\Users\\Administrator\\Documents\\Testing2"
         user: "Everyone"
         rights: Read,Write,Modify,FullControl,Delete
