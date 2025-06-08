@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    new_ssh_port: 2424
+    new_ssh_port: 7806
     sshd_config_path: /etc/ssh/sshd_config
     csv_path: /tmp
     csv_filename: report.csv
