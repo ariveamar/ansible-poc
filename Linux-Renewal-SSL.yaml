@@ -4,12 +4,12 @@
   become: yes
   vars:
     ssl_destination_dir: /etc/nginx/ssl
-    #ssl_cert_source_list_file: /secret/ssl-cert.pem  # Local control machine path to text file
-    #ssl_key_source_list_file: /secret/ssl-key.pem
+    ssl_cert_source_list_file: /secret/ssl-cert.pem  # Local control machine path to text file
+    ssl_key_source_list_file: /secret/ssl-key.pem
   tasks:
     - name: Copy SSL certificate to server
       ansible.builtin.copy:
-        src: "{{ ssl_cert_source_list_file }}"
+        remote_src: "{{ ssl_cert_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/ssl-cert.pem"
         owner: root
         group: root
@@ -17,7 +17,7 @@
 
     - name: Copy SSL private key to server
       ansible.builtin.copy:
-        src: "{{ ssl_key_source_list_file }}"
+        remote_src: "{{ ssl_key_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/ssl-key.pem"
         owner: root
         group: root
