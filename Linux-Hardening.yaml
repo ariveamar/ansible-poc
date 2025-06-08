@@ -5,6 +5,9 @@
   vars:
     ssh_port: 2424
     sshd_config_path: /etc/ssh/sshd_config
+    csv_path: /tmp
+    csv_filename: report.csv
+    headers: Hostname,SSH Port Before,SSH Port After
 
   tasks:
     - name: Disable root login via SSH
@@ -32,3 +35,24 @@
       ansible.builtin.service:
         name: sshd
         state: restarted
+    - name: change ssh port
+      set_fact:
+        ansible_port: "{{ ssh_port }}"
+
+    - name: test connection
+      ping:
+
+    - name: generate csv report file
+      lineinfile:
+        dest: "{{ csv_path }}/{{ csv_filename }}"
+        line: "{{ headers }}"
+        create: true
+        state: present
+      run_once: true
+
+    - name: insert data to report
+      lineinfile:
+        dest: "{{ csv_path }}/{{ csv_filename }}"
+        line: "{{ inventory_hostname }},22,{{ ssh_port }}"
+        create: true
+        state: present
