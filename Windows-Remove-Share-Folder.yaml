@@ -42,11 +42,11 @@
 
     - name: Remove 'Everyone' permissions from folders found
       ansible.windows.win_acl:
-        path: "{{ item }}"
+        path: "C:\\Users\\Administrator\\Documents\\Testing2"
         user: "Everyone"
         state: absent
         recurse: yes
-      loop: "{{ folders_with_everyone }}"
+#      loop: "{{ folders_with_everyone }}"
       register: remove_permissions_result
 
     - name: Show result of removing 'Everyone' permissions
