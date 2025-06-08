@@ -1,1 +1,54 @@
+---
+- name: Scan and Remediate Folders with 'Everyone' Permissions on Windows
+  hosts: all
+  gather_facts: no
+  vars:
+    root_folder_path: "C:\\Users\\Administrator\\Documents"  # Root folder to scan
 
+  tasks:
+    - name: Gather all directories recursively under root folder
+      ansible.windows.win_find:
+        paths: "{{ root_folder_path }}"
+        recurse: yes
+        file_type: directory
+      register: found_directories
+
+    - name: Initialize list of folders with 'Everyone' permission
+      ansible.builtin.set_fact:
+        folders_with_everyone: []
+
+    - name: Check 'Everyone' permission on each folder
+      ansible.windows.win_acl:
+        path: "{{ item.path }}"
+        user: "Everyone"
+        state: present
+      register: acl_check
+      loop: "{{ found_directories.files }}"
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Collect folders that have 'Everyone' permission
+      ansible.builtin.set_fact:
+        folders_with_everyone: "{{ folders_with_everyone + [item.item.path] }}"
+      loop: "{{ acl_check.results }}"
+      when: item.failed is not defined and not item.failed and item.changed == false and item.rc == 0
+      vars:
+        item: "{{ item }}"
+
+    - name: Show folders with 'Everyone' permissions
+      debug:
+        msg: "Folder with 'Everyone' permission: {{ item }}"
+      loop: "{{ folders_with_everyone }}"
+
+    - name: Remove 'Everyone' permissions from folders found
+      ansible.windows.win_acl:
+        path: "{{ item }}"
+        user: "Everyone"
+        state: absent
+        recurse: yes
+      loop: "{{ folders_with_everyone }}"
+      register: remove_permissions_result
+
+    - name: Show result of removing 'Everyone' permissions
+      debug:
+        var: remove_permissions_result
