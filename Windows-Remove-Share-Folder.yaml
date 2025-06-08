@@ -27,7 +27,7 @@
         state: absent
         recurse: yes
         type: allow
-      loop: "{{ {{ found_directories.files }}"
+      loop: "{{ found_directories.files }}"
       register: remove_permissions_result
 
     - name: Show result of removing 'Everyone' permissions
