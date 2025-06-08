@@ -23,7 +23,7 @@
         path:  "{{ item.path }}"
  #       path: "C:\\Users\\Administrator\\Documents\\Testing2"
         user: "Everyone"
-        rights: Read,Write
+        rights: Read,Write,Modify,FullControl,Delete
         state: absent
         recurse: yes
         type: allow
