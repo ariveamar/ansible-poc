@@ -44,6 +44,7 @@
       ansible.windows.win_acl:
         path: "C:\\Users\\Administrator\\Documents\\Testing2"
         user: "Everyone"
+        rights: Read,Write,Modify,FullControl,Delete
         state: absent
         recurse: yes
 #      loop: "{{ folders_with_everyone }}"
