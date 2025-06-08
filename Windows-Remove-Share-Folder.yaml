@@ -17,41 +17,17 @@
       ansible.builtin.set_fact:
         folders_with_everyone: []
 
-    - name: Check 'Everyone' permission on each folder
-      ansible.windows.win_acl:
-        path: "{{ item.path }}"
-        user: "Everyone"
-        state: present
-        rights: Read,Write
-        type: allow
-      register: acl_check
-      loop: "{{ found_directories.files }}"
-      ignore_errors: yes
-      changed_when: false
-
-    - name: Collect folders that have 'Everyone' permission
-      ansible.builtin.set_fact:
-        folders_with_everyone: "{{ folders_with_everyone + [item.item.path] }}"
-      loop: "{{ acl_check.results }}"
-      when: item.failed is not defined and not item.failed and item.changed == false and item.rc == 0
-      vars:
-        item: "{{ item }}"
-
-    - name: Show folders with 'Everyone' permissions
-      debug:
-        msg: "Folder with 'Everyone' permission: {{ item }}"
-      loop: "{{ folders_with_everyone }}"
 
     - name: Remove 'Everyone' permissions from folders found
       ansible.windows.win_acl:
-        path:  "{{ item }}"
-#        path: "C:\\Users\\Administrator\\Documents\\Testing2"
+        path:  "{{ item.path }}"
+ #       path: "C:\\Users\\Administrator\\Documents\\Testing2"
         user: "Everyone"
-        rights: Read,Write,Modify,FullControl,Delete
+        rights: Read,Write
         state: absent
         recurse: yes
         type: allow
-      loop: "{{ folders_with_everyone }}"
+      loop: "{{ {{ found_directories.files }}"
       register: remove_permissions_result
 
     - name: Show result of removing 'Everyone' permissions
