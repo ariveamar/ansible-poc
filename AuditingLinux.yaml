@@ -5,7 +5,7 @@
   become: yes
   vars:
     sshd_config_path: /etc/ssh/sshd_config
-    expected_ssh_port: 2424
+    expected_ssh_port: 7806
 
   tasks:
     - name: Check if root login is disabled in sshd_config
