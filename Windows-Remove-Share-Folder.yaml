@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   vars:
-    root_folder_path: "C:\\Users\\Administrator\\Documents"  # Root folder to scan
+    root_folder_path: "C:\\Users\\Administrator\\Documents\\Testing"  # Root folder to scan
 
   tasks:
     - name: Gather all directories recursively under root folder
