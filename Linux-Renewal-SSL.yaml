@@ -9,8 +9,11 @@
     ssl_key_source_list_file: /secret/ido.key
   tasks:
     - name: Backup SSL Cert
+      ignore_errors: yes
       shell: mv /etc/nginx/ssl/full.crt  /etc/nginx/ssl/full.crt.OLD
+      
     - name: Backup SSL Key
+      ignore_errors: yes
       shell: mv /etc/nginx/ssl/ido.key  /etc/nginx/ssl/ido.key.OLD
   
     - name: Copy SSL certificate to server
@@ -18,18 +21,14 @@
         remote_src: yes
         src: "{{ ssl_cert_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/full.crt"
-        owner: root
-        group: root
-        mode: '0644'
+        mode: '0777'
 
     - name: Copy SSL private key to server
       ansible.builtin.copy:
         remote_src: yes
         src: "{{ ssl_key_source_list_file }}"
         dest: "{{ ssl_destination_dir }}/ido.key"
-        owner: root
-        group: root
-        mode: '0600'
+        mode: '0777'
 
     - name: Reload Nginx to apply new SSL certificate
       ansible.builtin.service:
