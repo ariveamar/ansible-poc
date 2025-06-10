@@ -6,22 +6,22 @@
     root_folder_path: "C:\\ANSIBLE"  # Root folder to scan
 
   tasks:
-    - name: Gather all directories recursively under root folder
-      ansible.windows.win_find:
-        paths: "{{ root_folder_path }}"
-        recurse: yes
-        file_type: directory
-      register: found_directories
+#    - name: Gather all directories recursively under root folder
+#      ansible.windows.win_find:
+#        paths: "{{ root_folder_path }}"
+#        recurse: yes
+#        file_type: directory
+#      register: found_directories
 
-    - name: Initialize list of folders with 'Everyone' permission
-      ansible.builtin.set_fact:
-        folders_with_everyone: []
+#    - name: Initialize list of folders with 'Everyone' permission
+#      ansible.builtin.set_fact:
+#        folders_with_everyone: []
 
 
     - name: Remove 'Everyone' permissions from folders found
       ansible.windows.win_acl:
-        path:  "{{ item.path }}"
- #       path: "C:\\Users\\Administrator\\Documents\\Testing2"
+ #       path:  "{{ item.path }}"
+        path: "C:\\ANSIBLE\\NEW2"
         user: "Everyone"
         rights: Read,Write,Modify,FullControl,Delete
         state: absent
