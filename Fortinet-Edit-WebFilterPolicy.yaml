@@ -3,7 +3,6 @@
   hosts: all
   collections:
     - fortinet.fortios
-    - community.general
   gather_facts: no
 
   vars:
@@ -11,18 +10,17 @@
     #fortigate_host:  "{{ fortigate_host }}"
     #fortigate_token: "{{ ansible_password }}"
     webfilter_profile_name: "blocked_urls_profile"
-    blocked_urls_csv_path: "blocked_urls.csv"  # CSV file path
+   blocked_urls_path: "blocked_urls.txt"  # Path to the text file
 
   tasks:
-    - name: Read blocked URLs from CSV file
-      community.general.read_csv:
-        path: "{{ blocked_urls_csv_path }}"
-      register: csv_data
-
-    - name: Create urlfilter list from CSV data
+    - name: Read blocked URLs from text file into a list
       set_fact:
-        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': item.0 + 1, 'url': item.1.url, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
-      loop: "{{ csv_data.list | enumerate }}"
+        blocked_urls: "{{ lookup('file', blocked_urls_path).splitlines() }}"
+
+    - name: Create list of urlfilter dicts with ids
+      set_fact:
+        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': item.0 + 1, 'url': item.1, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
+      loop: "{{ blocked_urls | enumerate }}"
 
     - name: Configure web filter URL filter profile with URLs from CSV
       fortinet.fortios.fortios_webfilter_urlfilter:
