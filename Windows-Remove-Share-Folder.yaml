@@ -2,6 +2,7 @@
 - name: Scan and Remediate Folders with 'Everyone' Permissions on Windows
   hosts: all
   gather_facts: no
+  become: yes
   vars:
     root_folder_path: "C:\\ANSIBLE"  # Root folder to scan
 
