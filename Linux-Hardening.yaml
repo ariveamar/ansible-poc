@@ -43,6 +43,7 @@
           {% endif %}
   
     - name: Disable root login via SSH
+      become: yes
       ansible.builtin.lineinfile:
         path: "{{ sshd_config_path }}"
         regexp: '^#?PermitRootLogin\s+'
@@ -79,6 +80,7 @@
         ansible_port: "{{ new_ssh_port }}"
 
     - name: generate csv report file
+      become: yes
       lineinfile:
         dest: "{{ csv_path }}/{{ csv_filename }}"
         line: "{{ headers }}"
