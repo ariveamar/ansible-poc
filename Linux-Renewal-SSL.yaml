@@ -8,6 +8,11 @@
     ssl_cert_source_list_file: /secret/full.crt  # Local control machine path to text file
     ssl_key_source_list_file: /secret/ido.key
   tasks:
+    - name: Backup SSL Cert
+      shell: mv /etc/nginx/ssl/full.crt  /etc/nginx/ssl/full.crt.OLD
+    - name: Backup SSL Key
+      shell: mv /etc/nginx/ssl/ido.key  /etc/nginx/ssl/ido.key.OLD
+  
     - name: Copy SSL certificate to server
       ansible.builtin.copy:
         remote_src: yes
