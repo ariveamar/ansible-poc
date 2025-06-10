@@ -2,6 +2,8 @@
 - name: Harden SSH Configuration on Linux
   hosts: all
   become: yes
+  become_method: sudo
+  become_user: root
   vars:
     sshd_config_path: /etc/ssh/sshd_config
     expected_ssh_port: 7806
