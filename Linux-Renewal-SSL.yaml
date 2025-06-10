@@ -2,6 +2,7 @@
 - name: Replace SSL Certificate on Nginx Web Server
   hosts: all
   become: yes
+  become_method: sudo
   vars:
     ssl_destination_dir: /etc/nginx/ssl
     ssl_cert_source_list_file: /secret/full.crt  # Local control machine path to text file
