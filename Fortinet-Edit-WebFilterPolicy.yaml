@@ -3,6 +3,7 @@
   hosts: all
   collections:
     - fortinet.fortios
+    - community.general
   gather_facts: no
 
   vars:
