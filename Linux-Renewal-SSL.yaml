@@ -3,6 +3,7 @@
   hosts: all
   become: yes
   become_method: sudo
+  become_user: root
   vars:
     ssl_destination_dir: /etc/nginx/ssl
     ssl_cert_source_list_file: /secret/full.crt  # Local control machine path to text file
