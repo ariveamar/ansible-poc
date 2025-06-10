@@ -51,7 +51,6 @@
         state: present
         backrefs: yes
         create: yes
-      notify: Restart sshd
     - name: Update SSH config
       lineinfile:
         path: /etc/ssh/sshd_config
