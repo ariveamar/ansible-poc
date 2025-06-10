@@ -2,7 +2,6 @@
 - name: Harden SSH Configuration on Linux
   hosts: all
   become: yes
-  ignore_errors: yes
   vars:
     sshd_config_path: /etc/ssh/sshd_config
     expected_ssh_port: 7806
