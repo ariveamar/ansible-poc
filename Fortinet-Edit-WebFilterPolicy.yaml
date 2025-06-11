@@ -19,8 +19,8 @@
 
     - name: Create list of urlfilter dicts with ids
       set_fact:
-        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': (item.0 + 1), 'url': item.1, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
-      loop: "{{ blocked_urls | enumerate }}"
+        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': loop.index, 'url': item, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
+      loop: "{{ blocked_urls }}"
 
     - name: Configure web filter URL filter profile with URLs from CSV
       fortinet.fortios.fortios_webfilter_urlfilter:
