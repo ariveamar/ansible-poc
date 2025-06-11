@@ -1,6 +1,6 @@
 ---
-#collections:
-#  - fortinet.fortios
+collections:
+  - name: fortinet.fortios
 
 #  - name: chocolatey.chocolatey
 #  - name: commscope.icx
