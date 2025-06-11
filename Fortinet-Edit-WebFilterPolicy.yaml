@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   collections:
-    - name: fortinet.fortios
+    - fortinet.fortios
 
   vars:
     vdom: "root"
