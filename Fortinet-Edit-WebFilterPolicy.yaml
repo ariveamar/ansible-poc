@@ -10,7 +10,7 @@
     #fortigate_host:  "{{ fortigate_host }}"
     #fortigate_token: "{{ ansible_password }}"
     webfilter_profile_name: "blocked_urls_profile"
-   blocked_urls_path: "blocked_urls.txt"  # Path to the text file
+    blocked_urls_path: "blocked_urls.txt"  # Path to the text file
 
   tasks:
     - name: Read blocked URLs from text file into a list
