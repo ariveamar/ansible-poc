@@ -1,5 +1,7 @@
 ---
 collections:
+  - fortinet.fortios
+
 #  - name: chocolatey.chocolatey
 #  - name: commscope.icx
 #  - name: amazon.aws
