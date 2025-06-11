@@ -2,6 +2,8 @@
 - name: Block multiple URLs on Fortigate loaded from a CSV file
   hosts: all
   gather_facts: no
+  collections:
+    - name: fortinet.fortios
 
   vars:
     vdom: "root"
