@@ -32,9 +32,9 @@
     - name: Poweron virtual machine name {{ vm_name1 }}
       vmware_guest_powerstate:
         name: "{{ vm_name1 }}"
-        hostname: "{{ vcenter_server }}"
+        hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_user }}"
-        password: "{{ vcenter_pass }}"
+        password: "{{ vcenter_password }}"
         validate_certs: False
         folder: "{{ folder }}"
         state: powered-on
