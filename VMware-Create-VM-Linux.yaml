@@ -5,12 +5,17 @@
 #    - vcenter_vars.yml
   hosts: localhost
   tasks:
+    - name: Get the vCenter user
+      ansible.builtin.set_fact:
+#        vcenter_user: "{{ lookup('ansible.builtin.env', 'VMWARE_USER') }}"
+        vcenter_hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+        vcenter_password: "{{ lookup('ansible.builtin.env', 'VMWARE_PASSWORD') }}"
     - name: Clone a virtual machine {{ vm_name1 }} from existing template {{ template_name1 }}
       vmware_guest:
         name: "{{ vm_name1 }}"
         template: "{{ template_name1 }}"
         hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_user }}"
+        username: "{{ VMWARE_USER }}"
         password: "{{ vcenter_password }}"
         validate_certs: no 
         folder: "{{ folder }}"
