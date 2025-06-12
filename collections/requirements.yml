@@ -2,7 +2,7 @@
 collections:
 #  - name: fortinet.fortios
   - name: community.vmware
-  - name: community.general.read_csv
+  - name: community.general
 
 #  - name: chocolatey.chocolatey
 #  - name: commscope.icx
