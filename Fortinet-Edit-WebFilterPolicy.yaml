@@ -11,18 +11,15 @@
     blocked_urls_path: "blocked_urls.txt"  # Path to the text file
     csv_file_path: "users.csv"  # Path to your CSV file
   tasks:
-    - name: Read CSV file into variable
-      set_fact:
-        users: "{{ lookup('csvfile', csv_file_path, delimiter=',') }}"
-      
-    - name: Show all users data loaded from CSV
-      debug:
-        var: users
+   - name: reading the csv file
+     read_csv:
+      path: "{{ csv_file_path }}"
+     register: user_list
+     delegate_to: localhost
 
-    - name: Iterate over users and print details
-      debug:
-        msg: "Username: {{ item.username }}, Email: {{ item.email }}, Role: {{ item.role }}"
-      loop: "{{ users }}"
+   - name: display user_list data
+     debug:
+      var: user_list.list
 #    - name: Create list of urlfilter dicts with ids
 ##      set_fact:
  #       urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': loop.index, 'url': item, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
