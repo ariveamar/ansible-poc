@@ -2,8 +2,6 @@
 - name: Block multiple URLs on Fortigate loaded from a CSV file
   hosts: all
   gather_facts: no
-  collections:
-    - fortinet.fortios
 
   vars:
     vdom: "root"
@@ -11,23 +9,31 @@
     #fortigate_token: "{{ ansible_password }}"
     #webfilter_profile_name: "blocked_urls_profile"
     blocked_urls_path: "blocked_urls.txt"  # Path to the text file
-
+    csv_file_path: "users.csv"  # Path to your CSV file
   tasks:
-    - name: Read blocked URLs from text file into a list
+    - name: Read CSV file into variable
       set_fact:
-        blocked_urls: "{{ lookup('file', blocked_urls_path).splitlines() }}"
+        users: "{{ lookup('csvfile', csv_file_path, delimiter=',') }}"
+      
+    - name: Show all users data loaded from CSV
+      debug:
+        var: users
 
-    - name: Create list of urlfilter dicts with ids
-      set_fact:
-        urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': loop.index, 'url': item, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
-      loop: "{{ blocked_urls }}"
+    - name: Iterate over users and print details
+      debug:
+        msg: "Username: {{ item.username }}, Email: {{ item.email }}, Role: {{ item.role }}"
+      loop: "{{ users }}"
+#    - name: Create list of urlfilter dicts with ids
+##      set_fact:
+ #       urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': loop.index, 'url': item, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
+ #     loop: "{{ blocked_urls }}"
 
-    - name: Configure web filter URL filter profile with URLs from CSV
-      fortinet.fortios.fortios_webfilter_urlfilter:
-        access_token: "{{ fortigate_token }}"
-        vdom: "{{ vdom }}"
-        state: "present"
-        webfilter_urlfilter:
-          name: "{{ webfilter_profile_name }}"
-          comment: "Profile to block multiple URLs from CSV"
-          urlfilter: "{{ urlfilter_list }}"
+  #  - name: Configure web filter URL filter profile with URLs from CSV
+  #    fortinet.fortios.fortios_webfilter_urlfilter:
+  #      access_token: "{{ fortigate_token }}"
+  #      vdom: "{{ vdom }}"
+  #      state: "present"
+  #      webfilter_urlfilter:
+   #       name: "{{ webfilter_profile_name }}"
+     #     comment: "Profile to block multiple URLs from CSV"
+     #     urlfilter: "{{ urlfilter_list }}"
