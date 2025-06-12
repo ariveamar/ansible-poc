@@ -34,8 +34,8 @@
          name: "{{ webfilter_profile_name }}"
          comment: "Profile to block multiple URLs"
          urlfilter:
-           - id: 1
-             url: "{{ item.url }}"
+           - id: "{{ item.UID }}"
+             url: "{{ item.Username }}"
              type: "simple"
              action: "block"
              status: "enable"
