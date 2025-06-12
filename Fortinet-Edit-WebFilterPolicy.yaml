@@ -22,10 +22,9 @@
    - name: extract Username from all dictionaries
      debug:
        msg: "{{ item.Username }}"
-   - name: extract Username from all dictionaries
+   - name: Other Username from all dictionaries
      debug:
        msg: "{{ ansible_hostname }}"
-     loop: "{{ user_list.list }}"
    - name: Configure web filter URL filter profile with multiple blocked URLs
      fortinet.fortios.fortios_webfilter_urlfilter:
        access_token: "{{ fortigate_token }}"
