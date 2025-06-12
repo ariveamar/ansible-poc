@@ -1,6 +1,6 @@
-csv
-
-username,email,role
-alice,alice@example.com,admin
-bob,bob@example.com,user
-carol,carol@example.com,user
+Username,UID,First_name,Last_name,Groups,Password
+booker12,9012,Rachel,Booker,Operations,iambooker
+grey07,2070,Laura,Grey,Developers,iamgrey
+johnson81,4081,Craig,Johnson,Operations,iamjohnson
+jenkins46,9346,Mary,Jenkins,Developers,iamjenkins
+smith79,5079,Jamie,Smith,Operations,iamsmith
