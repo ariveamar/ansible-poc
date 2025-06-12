@@ -23,7 +23,7 @@
    - name: extract Username from all dictionaries
      debug:
        msg: "{{ item.Username }}"
-       loop: "{{ user_list.list }}"
+     loop: "{{ user_list.list }}"
 #    - name: Create list of urlfilter dicts with ids
 ##      set_fact:
  #       urlfilter_list: "{{ urlfilter_list | default([]) + [ {'id': loop.index, 'url': item, 'type': 'simple', 'action': 'block', 'status': 'enable'} ] }}"
