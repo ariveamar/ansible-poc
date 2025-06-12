@@ -17,6 +17,7 @@
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_password }}"
+        esxi_username: "root"
         validate_certs: no 
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
