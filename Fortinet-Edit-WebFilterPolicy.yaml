@@ -6,7 +6,7 @@
   vars:
     vdom: "root"
     fortigate_host:  "{{ fortigate_host }}"
-    fortigate_token: "{{ ansible_password }}"
+    fortigate_token: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"
     webfilter_profile_name: "webfilter"
     csv_file_path: "users.csv"  # Path to your CSV file
   tasks:
@@ -26,7 +26,7 @@
      debug:
        msg: 
          - "{{ fortigate_host }}"
-         - "{{ fortigate_token }}"
+         - "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"
    - name: Configure web filter URL filter profile with multiple blocked URLs
      fortinet.fortios.fortios_webfilter_urlfilter:
        access_token: "{{ fortigate_token }}"
