@@ -21,6 +21,7 @@
         validate_certs: no 
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
+        datastore: "{{ virtual_machine_datastore }}"
 #        esxi_hostname: "{{ target_host }}"
       register: vm_result
 
