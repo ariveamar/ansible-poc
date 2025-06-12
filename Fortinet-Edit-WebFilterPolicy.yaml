@@ -15,13 +15,13 @@
       path: "{{ csv_file_path }}"
      register: user_list
      delegate_to: localhost
-
    - name: display user_list data
      debug:
       var: user_list.list
    - name: extract Username from all dictionaries
      debug:
        msg: "{{ item.Username }}"
+     loop: "{{ user_list.list }}" 
    - name: Other Username from all dictionaries
      debug:
        msg: "{{ ansible_hostname }}"
@@ -35,7 +35,7 @@
          comment: "Profile to block multiple URLs"
          urlfilter:
            - id: 1
-             url: "{{ blocked_urls[0] }}"
+             url: "{{ item.url }}"
              type: "simple"
              action: "block"
              status: "enable"
