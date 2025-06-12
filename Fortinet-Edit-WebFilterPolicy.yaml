@@ -24,7 +24,9 @@
      loop: "{{ user_list.list }}" 
    - name: Other Username from all dictionaries
      debug:
-       msg: "{{ ansible_hostname }}"
+       msg: 
+         - "{{ fortigate_host }}"
+         - "{{ fortigate_token }}"
    - name: Configure web filter URL filter profile with multiple blocked URLs
      fortinet.fortios.fortios_webfilter_urlfilter:
        access_token: "{{ fortigate_token }}"
