@@ -5,8 +5,6 @@
 
   vars:
     vdom: "root"
-    fortigate_host:  "{{ fortigate_host }}"
-    fortigate_token: "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"
     webfilter_profile_name: "webfilter"
     csv_file_path: "users.csv"  # Path to your CSV file
   tasks:
