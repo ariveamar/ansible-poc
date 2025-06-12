@@ -24,7 +24,7 @@
      debug:
        msg: 
          - "{{ fortigate_host }}"
-         - "{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}"
+         - "{{ fortigate_token }}"
    - name: Configure web filter URL filter profile with multiple blocked URLs
      fortinet.fortios.fortios_webfilter_urlfilter:
        access_token: "{{ fortigate_token }}"
