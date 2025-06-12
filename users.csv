@@ -1,3 +1,5 @@
+csv
+
 username,email,role
 alice,alice@example.com,admin
 bob,bob@example.com,user
