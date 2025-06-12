@@ -20,7 +20,7 @@
         validate_certs: no 
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
-        cluster: "{{ target_host }}"
+        esxi_hostname: "{{ target_host }}"
       register: vm_result
 
     - name: Assert that VM is created
