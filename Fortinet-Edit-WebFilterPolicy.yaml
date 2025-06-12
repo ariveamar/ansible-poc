@@ -5,10 +5,9 @@
 
   vars:
     vdom: "root"
-    #fortigate_host:  "{{ fortigate_host }}"
-    #fortigate_token: "{{ ansible_password }}"
-    #webfilter_profile_name: "blocked_urls_profile"
-    blocked_urls_path: "blocked_urls.txt"  # Path to the text file
+    fortigate_host:  "{{ fortigate_host }}"
+    fortigate_token: "{{ ansible_password }}"
+    webfilter_profile_name: "webfilter"
     csv_file_path: "users.csv"  # Path to your CSV file
   tasks:
    - name: reading the csv file
@@ -23,6 +22,9 @@
    - name: extract Username from all dictionaries
      debug:
        msg: "{{ item.Username }}"
+   - name: extract Username from all dictionaries
+     debug:
+       msg: "{{ ansible_hostname }}"
      loop: "{{ user_list.list }}"
    - name: Configure web filter URL filter profile with multiple blocked URLs
      fortinet.fortios.fortios_webfilter_urlfilter:
