@@ -30,9 +30,9 @@
              status: "enable"
              type: "simple"
              url: "terlarang.com"
-             web_proxy_profile: "{{ webfilter_profile_name }}"
+#             web_proxy_profile: "{{ webfilter_profile_name }}"
          id: 0
-         name: urlfilter
+         name: WebFilter-BCAF
 #     loop: "{{ url_list.list }}" 
 
 
