@@ -6,26 +6,16 @@
   vars:
     vdom: "root"
     webfilter_profile_name: "webfilter"
-    csv_file_path: "users.csv"  # Path to your CSV file
+    csv_file_path: "blocked_urls.csv"  # Path to your CSV file
   tasks:
-   - name: reading the csv file
+   - name: Reading the csv file
      read_csv:
       path: "{{ csv_file_path }}"
-     register: user_list
+     register: url_list
      delegate_to: localhost
-   - name: display user_list data
+   - name: display url_list data
      debug:
-      var: user_list.list
-   - name: extract Username from all dictionaries
-     debug:
-       msg: "{{ item.Username }}"
-     loop: "{{ user_list.list }}" 
-   - name: Other Username from all dictionaries
-     debug:
-       msg: 
-         - "{{ fortigate_host }}"
-         - "{{ fortigate_token }}"
-
+      var: url_list.list
    - name: Configure URL filter lists.
      fortinet.fortios.fortios_webfilter_urlfilter:
        vdom: "{{ vdom }}"
@@ -36,18 +26,18 @@
          entries:
            - action: "block"
              dns_address_family: "ipv4"
-             id: "{{ item.UID | int }}"
+             id: "{{ item.UID1 | int }}"
              referrer_host: "myhostname"
              status: "enable"
              type: "simple"
-             url: "{{ item.Username }}"
+             url: "{{ item.URL }}"
              web_proxy_profile: "testing"
-         id: "{{ item.UID | int }}"
+         id: "{{ item.UID2 | int }}"
          ip_addr_block: "enable"
          ip4_mapped_ip6: "enable"
          name: "default_name_18"
          one_arm_ips_urlfilter: "enable"
-     loop: "{{ user_list.list }}" 
+     loop: "{{ url_list.list }}" 
 
 
 #    - name: Create list of urlfilter dicts with ids
