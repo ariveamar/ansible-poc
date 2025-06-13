@@ -24,6 +24,7 @@
        webfilter_urlfilter:
          name: "{{ webfilter_profile_name }}"
          comment: "Profile to block multiple URLs"
+         id: 0
          urlfilter:
            - id: 0
              url: "terlarang1.com"
