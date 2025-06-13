@@ -36,18 +36,18 @@
          entries:
            - action: "block"
              dns_address_family: "ipv4"
-             id: "9"
+             id: "{{ item.UID }}"
              referrer_host: "myhostname"
              status: "enable"
              type: "simple"
-             url: "myurl.com"
+             url: "{{ item.Username }}"
              web_proxy_profile: "testing"
-         id: "15"
+         id: "{{ item.Username }}"
          ip_addr_block: "enable"
          ip4_mapped_ip6: "enable"
          name: "default_name_18"
          one_arm_ips_urlfilter: "enable"
-#     loop: "{{ user_list.list }}" 
+     loop: "{{ user_list.list }}" 
 
 
 #    - name: Create list of urlfilter dicts with ids
