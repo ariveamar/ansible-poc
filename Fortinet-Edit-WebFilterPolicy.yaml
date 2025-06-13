@@ -1,11 +1,6 @@
 ---
 - name: Block multiple URLs on Fortigate loaded from a CSV file
   hosts: all
-  ansible_connection: httpapi
-  ansible_httpapi_validate_certs: 'no'
-  ansible_httpapi_use_ssl: 'yes'
-  ansible_httpapi_port: 65443
-  ansible_network_os: fortinet.fortios.fortios
   gather_facts: no
 
   vars:
