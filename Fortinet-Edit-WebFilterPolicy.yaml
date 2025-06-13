@@ -26,13 +26,13 @@
          entries:
            - action: "block"
              dns_address_family: "ipv4"
-             id: "{{ item.UID1 | int }}"
+             id: 0
              referrer_host: "myhostname"
              status: "enable"
              type: "simple"
              url: "{{ item.URL }}"
              web_proxy_profile: "testing"
-         id: "{{ item.UID2 | int }}"
+         id: 0
          ip_addr_block: "enable"
          ip4_mapped_ip6: "enable"
          name: "default_name_18"
