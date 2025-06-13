@@ -17,19 +17,19 @@
      debug:
       var: url_list.list
    - name: Configure web filter URL filter profile with multiple blocked URLs
-       fortinet.fortios.fortios_webfilter_urlfilter:
-         access_token: "{{ fortigate_token }}"
-         vdom: "{{ vdom }}"
-         state: "present"
-         webfilter_urlfilter:
-           name: "{{ webfilter_profile_name }}"
-           comment: "Profile to block multiple URLs"
-           urlfilter:
-             - id: 0
-               url: "terlarang1.com"
-               type: "simple"
-               action: "block"
-               status: "enable"
+     fortinet.fortios.fortios_webfilter_urlfilter:
+       access_token: "{{ fortigate_token }}"
+       vdom: "{{ vdom }}"
+       state: "present"
+       webfilter_urlfilter:
+         name: "{{ webfilter_profile_name }}"
+         comment: "Profile to block multiple URLs"
+         urlfilter:
+           - id: 0
+             url: "terlarang1.com"
+             type: "simple"
+             action: "block"
+             status: "enable"
 
 #    - name: Create list of urlfilter dicts with ids
 ##      set_fact:
