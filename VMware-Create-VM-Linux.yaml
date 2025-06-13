@@ -22,7 +22,7 @@
         folder: "{{ folder }}"
         datacenter: "{{ datacenter }}"
         datastore: "{{ virtual_machine_datastore }}"
-        esxi_hostname: "esx7.ivt.lab"
+        esxi_hostname: "{{ target_host }}"
       register: vm_result
 
     - name: Assert that VM is created
