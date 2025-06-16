@@ -1,8 +1,8 @@
 #---
 collections:
   - name: fortinet.fortios
-#  - name: community.vmware
   - name: community.general
+#  - name: community.vmware
 
 #  - name: chocolatey.chocolatey
 #  - name: commscope.icx
