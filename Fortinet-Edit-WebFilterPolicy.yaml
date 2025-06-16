@@ -20,6 +20,7 @@
      fortinet.fortios.fortios_webfilter_urlfilter:
        vdom: "{{ vdom }}"
        state: "present"
+       method: put
        access_token: "{{ fortigate_token }}"
        webfilter_urlfilter:
          comment: "Optional comments."
