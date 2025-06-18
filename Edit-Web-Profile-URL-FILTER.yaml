@@ -1,0 +1,43 @@
+- name: Block multiple URLs on Fortinet via REST API
+  hosts: localhost
+  gather_facts: no
+  vars:
+    base_url: "https://10.10.40.59:65443"
+    api_path: "/api/v2/cmdb/webfilter/urlfilter/1/entries"
+    vdom: "root"
+    auth_token: "{{ fortigate_token }}"
+    entries:
+      - url: "terlarang1.com"
+        action: "block"
+        dns-address-family: "ipv4"
+        status: "enable"
+        type: "simple"
+      - url: "malicious2.com"
+        action: "block"
+        dns-address-family: "ipv4"
+        status: "enable"
+        type: "simple"
+      - url: "examplebad3.com"
+        action: "block"
+        dns-address-family: "ipv4"
+        status: "enable"
+        type: "simple"
+
+  tasks:
+    - name: Add URL filter entry to Fortinet for each URL
+      uri:
+        validate_certs: no
+        url: "{{ base_url }}{{ api_path }}?vdom={{ vdom }}"
+        method: POST
+        headers:
+          Authorization: "Bearer {{ auth_token }}"
+          Content-Type: "application/json"
+        body: "{{ item | to_json }}"
+        status_code: 200,201
+        return_content: yes
+      loop: "{{ entries }}"
+      register: result
+
+    - name: Show response for each POST
+      debug:
+        var: result
