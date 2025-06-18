@@ -12,7 +12,7 @@
   tasks:
     - name: Read URLs from CSV file
       set_fact:
-        url_entries: "{{ lookup('community.general.read_csv', csv_file_path) }}"
+        url_entries: "{{ lookup('read_csv', csv_file_path) }}"
 
     - name: Build entries list for payload
       set_fact:
