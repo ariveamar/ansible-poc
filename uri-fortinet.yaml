@@ -10,10 +10,11 @@
       vdom: "root"
     auth_token: "{{ fortigate_token }}"
   tasks:
-    - name: Read URLs from CSV file
+    - name: Reading the csv file
+      read_csv:
+        path: "{{ csv_file_path }}"
+      register: url_entries
       delegate_to: localhost
-      set_fact:
-        url_entries: "{{ lookup('community.general.read_csv', csv_file_path) }}"
 
     - name: Build entries list for payload
       delegate_to: localhost
