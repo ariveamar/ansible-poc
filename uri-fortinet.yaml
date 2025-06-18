@@ -1,1 +1,48 @@
+- name: Block multiple URLs on Fortinet via REST API
+  hosts: localhost
+  gather_facts: no
+  vars:
+    base_url: "https://10.10.40.59"
+    api_path: "/api/v2/cmdb/webfilter/urlfilter/1"
+    api_params:
+      datasource: 1
+      vdom: "root"
+    auth_token: "{{ fortigate_token }}"
+    payload:
+      webfilter_urlfilter:
+        comment: "Blocking malicious URLs via API"
+        entries:
+          - url: "terlarang.com"
+            action: "block"
+            dns_address_family: "ipv4"
+            id: 0
+            status: "enable"
+            type: "simple"
+          - url: "malicious.com"
+            action: "block"
+            dns_address_family: "ipv4"
+            id: 1
+            status: "enable"
+            type: "simple"
+          - url: "examplebad.com"
+            action: "block"
+            dns_address_family: "ipv4"
+            id: 2
+            status: "enable"
+            type: "simple"
+  tasks:
+    - name: Send PUT request to block multiple URLs on Fortinet
+      uri:
+        url: "{{ base_url }}{{ api_path }}?datasource={{ api_params.datasource }}&vdom={{ api_params.vdom }}"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ auth_token }}"
+          Content-Type: "application/json"
+        body: "{{ payload | to_json }}"
+        status_code: 200,204
+        return_content: yes
+      register: api_response
 
+    - name: Show API response
+      debug:
+        var: api_response
