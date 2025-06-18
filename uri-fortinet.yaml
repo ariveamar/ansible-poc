@@ -33,6 +33,7 @@
   tasks:
     - name: Send PUT request to block multiple URLs on Fortinet
       uri:
+        validate_certs: no
         url: "{{ base_url }}{{ api_path }}?datasource={{ api_params.datasource }}&vdom={{ api_params.vdom }}"
         method: PUT
         headers:
