@@ -1,0 +1,35 @@
+---
+- name: Block multiple URLs on Fortigate loaded from a CSV file
+  hosts: all
+  gather_facts: no
+
+  vars:
+    vdom: "root"
+    webfilter_profile_name: "{{ webfilter_profile_name }}"
+    csv_file_path: "blocked_urls.csv"  # Path to your CSV file
+  tasks:
+   - name: Reading the csv file
+     read_csv:
+      path: "{{ csv_file_path }}"
+     register: url_list
+     delegate_to: localhost
+   - name: display url_list data
+     debug:
+      var: url_list.list
+   - name: Configure URL filter lists.
+     fortinet.fortios.fortios_webfilter_urlfilter:
+       vdom: "{{ vdom }}"
+       state: "present"
+       access_token: "{{ fortigate_token }}"
+       webfilter_urlfilter:
+         comment: "Optional comments."
+         entries:
+           - action: "block"
+             dns_address_family: "ipv4"
+             id: 0
+             status: "enable"
+             type: "simple"
+             url: "terlarang.com"
+#             web_proxy_profile: "{{ webfilter_profile_name }}"
+         id: 0
+         name: WebFilter-BCAF
