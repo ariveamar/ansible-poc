@@ -32,7 +32,7 @@
              url: "terlarang.com"
 #             web_proxy_profile: "{{ webfilter_profile_name }}"
          id: 0
-         name: WebFilter-BCAF
+         name:  "{{ webfilter_profile_name }}"
 #     loop: "{{ url_list.list }}" 
 #    - name: Create list of urlfilter dicts with ids
 ##      set_fact:
