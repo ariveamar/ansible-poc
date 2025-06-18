@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: no
   vars:
-    base_url: "https://10.10.40.59"
+    base_url: "https://10.10.40.59:65443"
     api_path: "/api/v2/cmdb/webfilter/urlfilter/1"
     api_params:
       datasource: 1
