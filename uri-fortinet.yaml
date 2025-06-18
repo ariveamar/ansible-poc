@@ -13,7 +13,7 @@
     - name: Reading the csv file
       read_csv:
         path: "{{ csv_file_path }}"
-      register: url_list
+      set_fact: url_list
       delegate_to: localhost
 
     - name: Build entries list with fixed parameters
