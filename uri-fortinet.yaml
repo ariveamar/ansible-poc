@@ -13,7 +13,7 @@
     - name: Read URLs from CSV file
       delegate_to: localhost
       set_fact:
-        url_entries: "{{ lookup('general.read_csv', csv_file_path) }}"
+        url_entries_raw: "{{ lookup('csvfile', 'urls.csv', delimiter=',', colnames=['id', 'url']) }}"
 
     - name: Build entries list for payload
       delegate_to: localhost
