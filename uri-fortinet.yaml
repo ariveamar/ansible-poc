@@ -16,19 +16,20 @@
       register: url_entries
       delegate_to: localhost
 
-    - name: Build entries list for payload
-      delegate_to: localhost
+    - name: Build entries list with fixed parameters
       set_fact:
-        entries_list: >
+        entries: >-
           {{
-            url_entries | map('combine', {
+            url_list | 
+            enumerate | 
+            map('community.general.dict_kv', ['url', 'id']) | 
+            map('combine', {
               'action': 'block',
               'dns_address_family': 'ipv4',
               'status': 'enable',
               'type': 'simple'
             }) | list
           }}
-
     - name: Debug entries list
       debug:
         var: entries_list
