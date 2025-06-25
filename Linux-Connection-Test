@@ -1,0 +1,8 @@
+---
+- name: Connection Test
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Connection test
+      ansible.builtin.shell:
+        cmd: ping "{{ target  }}" -c3
