@@ -44,29 +44,6 @@
         msg: "Vulnerable packages detected: {{ vulnerable_packages }}"
       when: vulnerable_packages is defined and vulnerable_packages | length > 0
 
-    - name: Remediate vulnerabilities by upgrading vulnerable packages
-      apt:
-        name: "{{ item }}"
-        state: latest
-        update_cache: yes
-      loop: "{{ vulnerable_packages }}"
-      when: vulnerable_packages is defined and vulnerable_packages | length > 0
-
-    - name: If no specific vulnerable packages found, run full dist-upgrade as fallback
-      apt:
-        upgrade: dist
-        update_cache: yes
-      when: vulnerable_packages is not defined or vulnerable_packages | length == 0
-
-    - name: Re-scan vulnerabilities after remediation
-      command: lynis audit system --quiet --log-file {{ lynis_log_after }}
-      register: scan_result_after
-
-    - name: Convert lynis log after remediation to HTML report
-      shell: |
-        echo "<html><body><pre>" > {{ scan_report_path_after }}
-        cat {{ lynis_log_after }} >> {{ scan_report_path_after }}
-        echo "</pre></body></html>" >> {{ scan_report_path_after }}
 
     - name: Fetch scan reports to control node
       fetch:
@@ -75,4 +52,3 @@
         flat: yes
       loop:
         - "{{ scan_report_path_before }}"
-        - "{{ scan_report_path_after }}"
