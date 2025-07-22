@@ -2,6 +2,7 @@
 - name: CVE Vulnerability Scan and Remediation on Ubuntu
   hosts: all
   become: true
+  become_user: root
   vars:
     scan_report_path_before: /tmp/vuln_scan_report_before.html
     scan_report_path_after: /tmp/vuln_scan_report_after.html
