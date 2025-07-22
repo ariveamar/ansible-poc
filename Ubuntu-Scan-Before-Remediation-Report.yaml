@@ -1,6 +1,6 @@
 ---
 - name: CVE Vulnerability Scan and Remediation on Ubuntu
-  hosts: ubuntu_servers
+  hosts: all
   become: true
   vars:
     scan_report_path_before: /tmp/vuln_scan_report_before.html
