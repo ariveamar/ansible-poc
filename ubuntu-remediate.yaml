@@ -1,0 +1,47 @@
+---
+- name: CVE Vulnerability Scan and Remediation on Ubuntu
+  hosts: ubuntu_servers
+  become: true
+  vars:
+    scan_report_path_before: /tmp/vuln_scan_report_before.html
+    scan_report_path_after: /tmp/vuln_scan_report_after.html
+    lynis_log_before: /tmp/lynis_scan.log
+    lynis_log_after: /tmp/lynis_scan_after.log
+
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Lynis vulnerability scanner
+      apt:
+        name: lynis
+        state: present
+
+    - name: Scan vulnerabilities before remediation
+      command: lynis audit system --quiet --log-file {{ lynis_log_before }}
+      register: scan_result_before
+
+    - name: Extract vulnerable packages from Lynis scan log
+      shell: |
+        grep -Eo 'Warning|suggestion' {{ lynis_log_before }} -A 2 | grep -Eo 'pkg=.*' | sed 's/pkg=//g' | tr '\n' ' '
+      register: vulnerable_pkgs_raw
+      changed_when: false
+
+    - name: Set list of vulnerable packages
+      set_fact:
+        vulnerable_packages: "{{ vulnerable_pkgs_raw.stdout.split() }}"
+      when: vulnerable_pkgs_raw.stdout != ""
+
+    - name: Print list of vulnerable packages detected
+      debug:
+        msg: "Vulnerable packages detected: {{ vulnerable_packages }}"
+      when: vulnerable_packages is defined and vulnerable_packages | length > 0
+
+    - name: Remediate vulnerabilities by upgrading vulnerable packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop: "{{ vulnerable_packages }}"
+      when: vulnerable_packages is defined and vulnerable_packages | length > 0
