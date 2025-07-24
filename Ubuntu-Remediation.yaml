@@ -13,15 +13,6 @@
       apt:
         update_cache: yes
 
-    - name: Install Lynis vulnerability scanner
-      apt:
-        name: lynis
-        state: present
-
-    - name: Scan vulnerabilities before remediation
-      command: lynis audit system --quiet --log-file {{ lynis_log_before }}
-      register: scan_result_before
-
     - name: Extract vulnerable packages from Lynis scan log
       shell: |
         grep -Eo 'Warning|suggestion' {{ lynis_log_before }} -A 2 | grep -Eo 'pkg=.*' | sed 's/pkg=//g' | tr '\n' ' '
