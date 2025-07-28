@@ -1,0 +1,30 @@
+---
+- name: Launch OpenStack Instance
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Create a VM instance
+      os_server:
+        state: present
+        auth:
+          auth_url: "https://ither/"
+          username: "admin"
+          password: "your_password"
+          project_name: "your_project"
+          user_domain_name: "Default"
+          project_domain_name: "Default"
+        name: "my-instance"
+        image: "Ubuntu 20.04"
+        flavor: "m1.small"
+        network: "private-network"
+        key_name: "my-keypair"
+        security_groups:
+          - default
+        wait: yes
+        timeout: 200
+      register: server
+
+    - name: Show new server IP address
+      debug:
+        msg: "New server created with IP {{ server.openstack.server.public_v4 }}"
