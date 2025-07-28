@@ -31,7 +31,7 @@
 
     - name: Extract vulnerable packages from Lynis scan log
       shell: |
-        grep -Eo 'Warning|suggestion' {{ lynis_log_before }} -A 2 | grep -Eo 'pkg=.*' | sed 's/pkg=//g' | tr '\n' ' '
+        grep 'Found vulnerable package:' {{ lynis_log_before }} | grep -oP 'package: \K\S+'
       register: vulnerable_pkgs_raw
       changed_when: false
 
