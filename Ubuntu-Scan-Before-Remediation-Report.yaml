@@ -46,10 +46,4 @@
       when: vulnerable_packages is defined and vulnerable_packages | length > 0
 
 
-    - name: Fetch scan reports to control node
-      fetch:
-        src: "{{ item }}"
-        dest: ./reports/
-        flat: yes
-      loop:
-        - "{{ scan_report_path_before }}"
+
