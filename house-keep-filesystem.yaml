@@ -1,0 +1,47 @@
+---
+- name: Backup and archive testing logs
+  hosts: all
+  become: yes
+  vars:
+    backup_filename: "backup_{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}_{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}.tar.gz"
+    temp_dir: /backup/temp
+    final_dest: /backup
+  tasks:
+
+    - name: Ensure temporary directory exists
+      file:
+        path: "{{ temp_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Find files matching the pattern testing.log.tar.gz
+      find:
+        paths: /var/log/audit/
+        patterns: "testing.log.tar.gz"
+        recurse: yes
+      register: log_files
+
+    - name: Move matching log files to the temporary directory
+      command: mv "{{ item.path }}" "{{ temp_dir }}/"
+      loop: "{{ log_files.files }}"
+      when: log_files.matched > 0
+      ignore_errors: yes
+
+    - name: Create a timestamped archive of the temporary directory
+      archive:
+        path: "{{ temp_dir }}/"
+        dest: "{{ temp_dir }}/{{ backup_filename }}"
+        format: gz
+      when: log_files.matched > 0
+
+    - name: Copy the archive to the final backup location
+      copy:
+        src: "{{ temp_dir }}/{{ backup_filename }}"
+        dest: "{{ final_dest }}/{{ backup_filename }}"
+        mode: '0644'
+      when: log_files.matched > 0
+
+    - name: Remove the temporary directory together with its contents
+      file:
+        path: "{{ temp_dir }}"
+        state: absent
