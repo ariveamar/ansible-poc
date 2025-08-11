@@ -1,7 +1,8 @@
 ---
 - name: Backup and archive testing logs
   hosts: all
-  become: yes
+  become_method: sudo
+  become_user: root
   vars:
     temp_dir: /backup/temp
   tasks:
