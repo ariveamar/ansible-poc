@@ -2,16 +2,12 @@
 - name: Backup and archive testing logs
   hosts: all
   become: yes
-  become-user: root
   vars:
     temp_dir: /backup/temp
   tasks:
 
-    - name: Ensure temporary directory exists
-      file:
-        path: "{{ temp_dir }}"
-        state: directory
-        mode: '0755'
+    - name: Create temp directory
+      command: mkdir /backup/temp
     - name: Move matching log files to the temporary directory
       command: mv /var/log/audit/testing* "{{ temp_dir }}/"
     - name: Create a timestamped archive of the temporary directory
