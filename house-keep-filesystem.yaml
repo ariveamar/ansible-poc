@@ -17,7 +17,7 @@
     - name: Find files matching the pattern testing.log.tar.gz
       find:
         paths: /var/log/audit/
-        patterns: "testing.log.tar.gz"
+        patterns: "testing*.log.tar.gz"
         recurse: yes
       register: log_files
 
