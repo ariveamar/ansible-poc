@@ -2,6 +2,7 @@
 - name: Backup and archive testing logs
   hosts: all
   become: yes
+  become-user: root
   vars:
     temp_dir: /backup/temp
   tasks:
