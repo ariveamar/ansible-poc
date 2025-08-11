@@ -3,8 +3,7 @@
   hosts: all
   become: yes
   vars:
-    backup_filename: "backup_{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}_{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}.tar.gz"
-    temp_dir: /backup/temp
+     temp_dir: /backup/temp
     final_dest: /backup
   tasks:
 
@@ -13,27 +12,10 @@
         path: "{{ temp_dir }}"
         state: directory
         mode: '0755'
-
     - name: Move matching log files to the temporary directory
       command: mv /var/log/audit/testing* "{{ temp_dir }}/"
-      loop: "{{ log_files.files }}"
-      when: log_files.matched > 0
-      ignore_errors: yes
-
     - name: Create a timestamped archive of the temporary directory
-      archive:
-        path: "{{ temp_dir }}/"
-        dest: "{{ temp_dir }}/{{ backup_filename }}"
-        format: gz
-      when: log_files.matched > 0
-
-    - name: Copy the archive to the final backup location
-      copy:
-        src: "{{ temp_dir }}/{{ backup_filename }}"
-        dest: "{{ final_dest }}/{{ backup_filename }}"
-        mode: '0644'
-      when: log_files.matched > 0
-
+      command: tar -czvf /backup/archive_$(date +%Y%m%d_%H%M%S).tar.gz /backup/temp/
     - name: Remove the temporary directory together with its contents
       file:
         path: "{{ temp_dir }}"
