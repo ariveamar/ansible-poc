@@ -3,8 +3,7 @@
   hosts: all
   become: yes
   vars:
-     temp_dir: /backup/temp
-    final_dest: /backup
+    temp_dir: /backup/temp
   tasks:
 
     - name: Ensure temporary directory exists
