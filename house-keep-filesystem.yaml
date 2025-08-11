@@ -12,7 +12,7 @@
     - name: Create temp directory
       command: mkdir /backup/temp
     - name: Move matching log files to the temporary directory
-      shell: mv /var/log/audit/"{{ file_pattern }}" "{{ temp_dir }}/"
+      shell: mv /var/log/audit/{{ file_pattern }} "{{ temp_dir }}/"
     - name: Create a timestamped archive of the temporary directory
       shell: tar -czvf /"{{ temp_dir }}"/archive_$(date +%Y%m%d_%H%M%S).tar.gz /backup/temp/
     - name: Remove the temporary directory together with its contents
