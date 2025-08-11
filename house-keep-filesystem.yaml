@@ -14,15 +14,8 @@
         state: directory
         mode: '0755'
 
-    - name: Find files matching the pattern testing.log.tar.gz
-      find:
-        paths: /var/log/audit/
-        patterns: "testing*.log.tar.gz"
-        recurse: yes
-      register: log_files
-
     - name: Move matching log files to the temporary directory
-      command: mv "{{ item.path }}" "{{ temp_dir }}/"
+      command: mv /var/log/audit/testing* "{{ temp_dir }}/"
       loop: "{{ log_files.files }}"
       when: log_files.matched > 0
       ignore_errors: yes
