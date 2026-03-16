@@ -5,4 +5,4 @@
   tasks:
     - name: Connection test
       ansible.builtin.shell:
-        cmd: ping "{{ target  }}" -c3
+        cmd: ping 1.1.1.1 -c3
