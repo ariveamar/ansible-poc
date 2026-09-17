@@ -1,0 +1,17 @@
+- name: Server baseline configuration
+  hosts: all
+  become: true
+ 
+  vars:
+    admin_user: webadmin
+    admin_password: "{{ lookup('env', 'ADMIN_PASSWORD') | default('ChangeMe123!', true) }}"
+    app_timezone: "Asia/Jakarta"
+    locales_needed:
+      - en_US.UTF-8
+      - id_ID.UTF-8
+ 
+  tasks:
+    # --- Timezone ------------------------------------------------------------
+    - name: Set system timezone
+      community.general.timezone:
+        name: "{{ app_timezone }}"
