@@ -1,6 +1,7 @@
 ---
 collections:
   - name: community.general
+  - name: community.vmware
 #  - name: fortinet.fortios
 
 #  - name: community.vmware
