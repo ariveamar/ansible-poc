@@ -13,3 +13,6 @@
         run_job_template:
           name: "Ping Job Template"     # must match the Job Template name in AAP/Controller
           organization: "Default"
+
+
+### Excute the payload to this webhook : curl -X POST http://IPADDRESS_EDA:5000/endpoint   -H "Content-Type: application/json"   -d '{"message": "trigger ping"}'
